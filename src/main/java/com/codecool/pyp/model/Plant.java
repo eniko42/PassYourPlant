@@ -1,16 +1,30 @@
 package com.codecool.pyp.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.nio.file.Path;
 import java.util.UUID;
 
+@Entity
+@Table
 public class Plant {
 
+    @Id
+    @Column
     private UUID plantId;
+    @Column
     private String name;
+    @Column
     private String description;
-    private Path photo;
+    @Column
+    private String photo;
+    @Column
     private String location;
+    @Column
     private String contact;
+    @Column
     private boolean available;
 
     public UUID getPlantId() {
@@ -25,7 +39,7 @@ public class Plant {
         return description;
     }
 
-    public Path getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
@@ -49,7 +63,7 @@ public class Plant {
         this.description = description;
     }
 
-    public void setPhoto(Path photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
