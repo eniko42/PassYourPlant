@@ -13,7 +13,7 @@ CREATE TABLE PUBLIC.plant
 (
     id         IDENTITY NOT NULL PRIMARY KEY,
     user_name   VARCHAR NOT NULL,
-    plant_name  VARCHAR NOT NULL,
+    plant_name   VARCHAR NOT NULL,
     description VARCHAR NOT NULL,
     photo       VARCHAR NOT NULL,
     location    VARCHAR NOT NULL,

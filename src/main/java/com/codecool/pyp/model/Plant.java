@@ -11,9 +11,11 @@ public class Plant {
 
     @Id
     @Column
-    private int plantId;
-    @Column
-    private String name;
+    private int id;
+    @Column(name = "user_name")
+    private String userName;
+    @Column(name = "plant_name")
+    private String plantName;
     @Column
     private String description;
     @Column
@@ -25,13 +27,10 @@ public class Plant {
     @Column
     private boolean available;
 
-    public int getPlantId() {
-        return plantId;
+    public int getId() {
+        return id;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public String getDescription() {
         return description;
@@ -53,8 +52,20 @@ public class Plant {
         return available;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPlantName() {
+        return plantName;
+    }
+
+    public void setPlantName(String plantName) {
+        this.plantName = plantName;
     }
 
     public void setDescription(String description) {

@@ -1,0 +1,60 @@
+GET http://localhost:8080/api/plants
+
+<> 2022-06-23T120324.200.json
+
+###
+
+DELETE http://localhost:8080/api/plants/2
+
+###
+
+GET http://localhost:8080/api/plants/1/comments
+
+<> 2022-06-23T120252.200.json
+
+###
+
+GET http://localhost:8080/api/plants
+
+<> 2022-06-23T115931.200.json
+
+###
+
+DELETE http://localhost:8080/api/plants/2
+
+###
+
+GET http://localhost:8080/api/plants
+
+<> 2022-06-23T115603.200.json
+
+###
+
+GET http://localhost:8080/api/plants/1/comments
+
+<> 2022-06-23T101848.200.json
+
+###
+
+GET http://localhost:8080/api/plants/1/comments
+
+<> 2022-06-23T101613.200.json
+
+###
+
+GET http://localhost:8080/api/plants/1/comments
+
+<> 2022-06-23T101342.200.json
+
+###
+
+GET http://localhost:8080/api/plants/1/comments
+
+<> 2022-06-23T094944.200.json
+
+###
+
+GET http://localhost:8080/api/plants/{{id}}/comments
+
+###
+

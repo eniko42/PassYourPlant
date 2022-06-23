@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table
@@ -13,13 +12,13 @@ public class Comment {
     @Id
     @Column
     private int id;
-    @Column
+    @Column(name = "plant_id")
     private int plantId;
     @Column
     private String message;
-    @Column
-    private String username;
-    @Column
+    @Column(name = "user_name")
+    private String userName;
+    @Column(name = "time_stamp")
     private LocalDate timeStamp;
 
     public int getId() {
@@ -34,8 +33,8 @@ public class Comment {
         return message;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
     public LocalDate getTimeStamp() {
@@ -46,8 +45,8 @@ public class Comment {
         this.message = message;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String username) {
+        this.userName = username;
     }
 
     public void setPlantId(int plantId) {
