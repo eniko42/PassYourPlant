@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS PUBLIC.comment;
 CREATE TABLE PUBLIC.comment
 (
-    id         IDENTITY NOT NULL PRIMARY KEY,
+    id         int NOT NULL PRIMARY KEY,
     plant_id   int               NOT NULL,
     message    VARCHAR           NOT NULL,
     user_name  VARCHAR           NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE PUBLIC.comment
 DROP TABLE IF EXISTS PUBLIC.plant CASCADE ;
 CREATE TABLE PUBLIC.plant
 (
-    id         IDENTITY NOT NULL PRIMARY KEY,
+    id         int NOT NULL PRIMARY KEY,
     user_name   VARCHAR NOT NULL,
     plant_name   VARCHAR NOT NULL,
     description VARCHAR NOT NULL,
