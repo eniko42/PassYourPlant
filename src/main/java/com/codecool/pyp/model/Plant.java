@@ -1,9 +1,8 @@
 package com.codecool.pyp.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -11,9 +10,12 @@ public class Plant {
 
     @Id
     @Column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    @JsonProperty("user_name")
     @Column(name = "user_name")
     private String userName;
+    @JsonProperty("plant_name")
     @Column(name = "plant_name")
     private String plantName;
     @Column
