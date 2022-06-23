@@ -19,18 +19,18 @@ public class CommentService {
     public List<Comment> getComments(String id) {
         List<Comment> comments = new ArrayList<>();
         comments.addAll(StreamSupport.stream(commentRepository.findAll().spliterator(), false)
-                .filter(comment -> comment.getPlantId().equals(UUID.fromString(id))).toList());
+                .filter(comment -> comment.getPlantId() == Integer.parseInt(id)).toList());
         return comments;
     }
 
     public void addOrUpdateComment(Comment comment, String plantId) {
-        comment.setPlantId(UUID.fromString(plantId));
+        comment.setPlantId(Integer.parseInt(plantId));
         commentRepository.save(comment);
     }
 
 
     public void deleteComment(Comment comment, String plantId) {
-        comment.setPlantId(UUID.fromString(plantId));
+        comment.setPlantId(Integer.parseInt(plantId));
         commentRepository.delete(comment);
     }
 }

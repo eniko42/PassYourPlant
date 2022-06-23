@@ -12,9 +12,9 @@ import java.util.UUID;
 public class Comment {
     @Id
     @Column
-    private UUID id;
+    private int id;
     @Column
-    private UUID plantId;
+    private int plantId;
     @Column
     private String message;
     @Column
@@ -22,11 +22,11 @@ public class Comment {
     @Column
     private LocalDate timeStamp;
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
-    public UUID getPlantId() {
+    public int getPlantId() {
         return plantId;
     }
 
@@ -50,7 +50,7 @@ public class Comment {
         this.username = username;
     }
 
-    public void setPlantId(UUID plantId) {
+    public void setPlantId(int plantId) {
         this.plantId = plantId;
     }
 }
