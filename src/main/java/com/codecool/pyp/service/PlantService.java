@@ -4,7 +4,6 @@ import com.codecool.pyp.model.Plant;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class PlantService {
@@ -12,11 +11,11 @@ public class PlantService {
         return null;
     }
 
-    public Plant getPlant(UUID id) {
+    public Plant getPlant(int id) {
         return null;
     }
 
-    public void deletePlant(UUID id) {
+    public void deletePlant(int id) {
     }
 
     public void addOrUpdatePlant(Plant plant) {

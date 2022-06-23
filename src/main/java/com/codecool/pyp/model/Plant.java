@@ -4,8 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.nio.file.Path;
-import java.util.UUID;
 
 @Entity
 @Table
@@ -13,7 +11,7 @@ public class Plant {
 
     @Id
     @Column
-    private UUID plantId;
+    private int plantId;
     @Column
     private String name;
     @Column
@@ -27,7 +25,7 @@ public class Plant {
     @Column
     private boolean available;
 
-    public UUID getPlantId() {
+    public int getPlantId() {
         return plantId;
     }
 
