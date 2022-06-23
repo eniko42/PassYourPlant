@@ -55,4 +55,8 @@ public class Comment {
     public void setPlantId(int plantId) {
         this.plantId = plantId;
     }
+
+    public void setTimestamp(LocalDate timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 }
