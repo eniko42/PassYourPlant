@@ -5,7 +5,7 @@ CREATE TABLE PUBLIC.comment
     plant_id   int               NOT NULL,
     message    VARCHAR           NOT NULL,
     user_name  VARCHAR           NOT NULL,
-    time_stamp TIMESTAMP         NOT NULL
+    time_stamp TIMESTAMP
 );
 
 DROP TABLE IF EXISTS PUBLIC.plant CASCADE ;
