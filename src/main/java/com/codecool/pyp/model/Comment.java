@@ -1,9 +1,8 @@
 package com.codecool.pyp.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -11,13 +10,17 @@ import java.time.LocalDate;
 public class Comment {
     @Id
     @Column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    @JsonProperty("plant_id")
     @Column(name = "plant_id")
     private int plantId;
     @Column
     private String message;
+    @JsonProperty("user_name")
     @Column(name = "user_name")
     private String userName;
+    @JsonProperty("time_stamp")
     @Column(name = "time_stamp")
     private LocalDate timeStamp;
 
