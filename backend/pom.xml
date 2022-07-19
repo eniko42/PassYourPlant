@@ -48,11 +48,3 @@
 	</build>
 
 </project>
-<profiles>
-    <profile>
-        <id>outputDir</id>
-        <build>
-            <directory>backend</directory>
-        </build>
-    </profile>
-</profiles>
