@@ -70,7 +70,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: java-app
-          path: backend/
+          path: backend/java-app
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
