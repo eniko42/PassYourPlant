@@ -1,10 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-<<<<<<< HEAD
 import Navbar from'./Navbar';
-=======
 import { Title } from './Title';
->>>>>>> development
+import { Footer } from './Footer';
 
 function App() {
   const title = "Pass Your Plant";
@@ -27,6 +25,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <Footer />
     </div>
   );
 }
