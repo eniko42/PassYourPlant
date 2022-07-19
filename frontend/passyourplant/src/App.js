@@ -15,7 +15,31 @@ function App() {
   {
     name: 'Daisy',
     pic: logo
-  }
+  },
+  {
+    name: 'Sunflower',
+    pic: logo
+  },
+  {
+    name: 'Tulip',
+    pic:logo
+  },
+  {
+    name: 'Rose',
+    pic: logo
+},
+{
+  name: 'Daisy',
+  pic: logo
+},
+{
+  name: 'Sunflower',
+  pic: logo
+},
+{
+  name: 'Tulip',
+  pic:logo
+}
 ]
   return (
     <div className="App">
@@ -25,9 +49,12 @@ function App() {
         <Title title={title}></Title>
         
       </header>
+      <div className="Card-container">
       {plants.map((plant, idx) => (
           <Card key={idx} name={plant.name} pic={plant.pic}/>
       ))}
+      </div>
+      
       <Footer />
     
       
