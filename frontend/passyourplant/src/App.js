@@ -10,35 +10,43 @@ function App() {
   const plants = [
     {
       name: 'Rose',
-      pic: logo
+      pic: logo,
+      available: true
   },
   {
     name: 'Daisy',
-    pic: logo
+    pic: logo,
+    available: false
   },
   {
     name: 'Sunflower',
-    pic: logo
+    pic: logo,
+    available: true
   },
   {
     name: 'Tulip',
-    pic:logo
+    pic:logo,
+    available: true
   },
   {
     name: 'Rose',
-    pic: logo
+    pic: logo,
+    available: false
 },
 {
   name: 'Daisy',
-  pic: logo
+  pic: logo,
+  available: false
 },
 {
   name: 'Sunflower',
-  pic: logo
+  pic: logo,
+  available: false
 },
 {
   name: 'Tulip',
-  pic:logo
+  pic:logo,
+  available: false
 }
 ]
   return (
@@ -51,7 +59,7 @@ function App() {
       </header>
       <div className="Card-container">
       {plants.map((plant, idx) => (
-          <Card key={idx} name={plant.name} pic={plant.pic}/>
+          <Card key={idx} name={plant.name} pic={plant.pic} available={plant.available}/>
       ))}
       </div>
       
