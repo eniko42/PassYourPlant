@@ -8,6 +8,13 @@ export function Card(props) {
             <div className="cardcontainer">
                 <h4><b>{props.name}</b></h4>
             </div>
+            <div>
+                {props.available ? 
+                <p style={{color: "green"}}>Available</p> :
+                <p style={{color: "red"}}> Taken</p>
+                }
+            </div>
+            
         </div>
     )
 }

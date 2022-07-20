@@ -43,7 +43,7 @@ componentDidMount() {
       </header>
       <div className="Card-container">
       {this.state.plants.map((plant, idx) => (
-          <Card key={idx} name={plant.plant_name} pic={plant.photo}/>
+          <Card key={idx} name={plant.plant_name} pic={plant.photo} available={plant.available}/>
       ))}
       </div>
       
