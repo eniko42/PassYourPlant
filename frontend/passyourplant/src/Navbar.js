@@ -1,4 +1,5 @@
 import './index.css';
+import { Link } from "react-router-dom";
 
 function Navbar() {
     return (
@@ -16,7 +17,7 @@ function Navbar() {
       <a className="nav-link" href="#">Add plant</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link disabled" href="#">About</a>
+      <Link to="/about">About us</Link>
       </li>
     </ul>
   </div>
