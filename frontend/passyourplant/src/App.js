@@ -5,53 +5,39 @@ import { Footer } from './Footer';
 import {Card} from './Card';
 import logo from './logo.svg';
 
-function App() {
-  const title = "Pass Your Plant";
-  const plants = [
-    {
-      name: 'Rose',
-      pic: logo
-  },
-  {
-    name: 'Daisy',
-    pic: logo
-  },
-  {
-    name: 'Sunflower',
-    pic: logo
-  },
-  {
-    name: 'Tulip',
-    pic:logo
-  },
-  {
-    name: 'Rose',
-    pic: logo
-},
-{
-  name: 'Daisy',
-  pic: logo
-},
-{
-  name: 'Sunflower',
-  pic: logo
-},
-{
-  name: 'Tulip',
-  pic:logo
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        title: "Pass Your Plant",
+        plants: [],
+        DataisLoaded: false
+    };
 }
-]
+
+componentDidMount() {
+  fetch("/api/plants")
+      .then((res) => res.json())
+      .then((json) => {
+          this.setState({
+              plants: json,
+              DataisLoaded: true
+          });
+      })
+}
+  render() {
   return (
     <div className="App">
       <Navbar />
       <header className="App-header">
 
-        <Title title={title}></Title>
+        <Title title={this.title}></Title>
         
       </header>
       <div className="Card-container">
       {plants.map((plant, idx) => (
-          <Card key={idx} name={plant.name} pic={plant.pic}/>
+          <Card key={idx} name={plant.name} pic={plant.photo}/>
       ))}
       </div>
       
@@ -60,6 +46,7 @@ function App() {
       
     </div>
   );
+      }
 }
 
 export default App;
