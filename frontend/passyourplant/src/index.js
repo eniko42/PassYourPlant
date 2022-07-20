@@ -9,14 +9,16 @@ import {
   Route,
 } from "react-router-dom";
 import About from './About';
+import PlantDetail from './PlantDetail'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="/about" element={<About />} />
-      </Routes>
+      <Route path="about" element={<About />} />
+      <Route path='plant-detail/:id' element={<PlantDetail />} />
+    </Routes>
   </BrowserRouter>
 );
 
