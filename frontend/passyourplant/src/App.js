@@ -1,3 +1,4 @@
+import React from "react";
 import './App.css';
 import Navbar from'./Navbar';
 import { Title } from './Title';
@@ -5,61 +6,44 @@ import { Footer } from './Footer';
 import {Card} from './Card';
 import logo from './logo.svg';
 
-function App() {
-  const title = "Pass Your Plant";
-  const plants = [
-    {
-      name: 'Rose',
-      pic: logo,
-      available: true
-  },
-  {
-    name: 'Daisy',
-    pic: logo,
-    available: false
-  },
-  {
-    name: 'Sunflower',
-    pic: logo,
-    available: true
-  },
-  {
-    name: 'Tulip',
-    pic:logo,
-    available: true
-  },
-  {
-    name: 'Rose',
-    pic: logo,
-    available: false
-},
-{
-  name: 'Daisy',
-  pic: logo,
-  available: false
-},
-{
-  name: 'Sunflower',
-  pic: logo,
-  available: false
-},
-{
-  name: 'Tulip',
-  pic:logo,
-  available: false
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        title: "Pass Your Plant",
+        plants: [],
+        DataisLoaded: false
+    };
 }
-]
+
+componentDidMount() {
+  fetch("/api/plants")
+      .then((res) => res.json())
+      .then((json) => {
+          this.setState({
+              plants: json,
+              DataisLoaded: true
+          });
+          //console.log(this.state.plants);
+      })
+}
+  render() {
+    const { DataisLoaded, plants} = this.state;
+    if(!DataisLoaded) return <div>
+      <h1>Please wait...</h1>
+    </div>
   return (
     <div className="App">
       <Navbar />
       <header className="App-header">
 
-        <Title title={title}></Title>
+        <Title title={this.state.title}></Title>
         
       </header>
       <div className="Card-container">
-      {plants.map((plant, idx) => (
-          <Card key={idx} name={plant.name} pic={plant.pic} available={plant.available}/>
+      {this.state.plants.map((plant, idx) => (
+          <Card key={idx} name={plant.plant_name} pic={plant.photo} available={plant.available}/>
       ))}
       </div>
       
@@ -68,6 +52,7 @@ function App() {
       
     </div>
   );
+      }
 }
 
 export default App;
