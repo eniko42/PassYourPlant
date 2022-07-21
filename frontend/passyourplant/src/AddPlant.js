@@ -1,16 +1,17 @@
 import React from "react"
 import "./AddPlant.css"
+import { useNavigate } from 'react-router-dom';
 
-class AddPlant extends React.Component{
+export function AddPlant(){
+    const navigate = useNavigate();
 
-
-handleClick(){
+function handleClick(){
     const userName = document.getElementById("user_name").value;
     const plantName = document.getElementById("plant_name").value;
     const desc = document.getElementById("desc").value;
     const loc = document.getElementById("loc").value;
     const contact = document.getElementById("contact").value;
-    console.log(userName);
+    
     fetch('api/plants', {
         method: "POST",
         headers: {'Content-Type':'application/json'},
@@ -23,10 +24,11 @@ handleClick(){
             "contact": contact,
             "available": true    
            })
-    })
+    }).then(navigate('/', ));
+    
 }
 
-    render(){
+    
         return(
         <div>
             <form className="addPlantCard">
@@ -52,12 +54,10 @@ handleClick(){
                     <input type="text" name="contact" id="contact"></input>
                 </div>                            
                 
-                <button onClick={this.handleClick} className="submitButton btn" type="submit">Upload</button>     
+                <button onClick={handleClick} className="submitButton btn" type="submit">Upload</button>     
 
             </form>
 
         </div>)
-    }
-}
 
-export default AddPlant;
+}

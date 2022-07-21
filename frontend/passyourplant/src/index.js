@@ -9,8 +9,8 @@ import {
   Route,
 } from "react-router-dom";
 import About from './About';
-import PlantDetail from './PlantDetail'
-import AddPlant from './AddPlant'
+import PlantDetail from './PlantDetail';
+import {AddPlant} from './AddPlant';
 import Layout from './Layout';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
