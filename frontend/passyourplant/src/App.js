@@ -3,8 +3,10 @@ import './App.css';
 import Navbar from './Navbar';
 import { Title } from './Title';
 import { Footer } from './Footer';
+import logo from './plant.svg';
+import logo2 from './plant-2.svg';
 import { Card } from './Card';
-import logo from './logo.svg';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -38,11 +40,15 @@ class App extends React.Component {
         <header className="App-header">
 
           <Title title={this.state.title}></Title>
+          <div className="logos">
+          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo2} className="App-logo-2" alt="logo" />
+        </div>
 
         </header>
         <div className="Card-container">
           {this.state.plants.map((plant, idx) => (
-            <Card key={idx} plant={plant} name={plant.plant_name} />
+            <Card key={idx} plant={plant} />
           ))}
         </div>
 

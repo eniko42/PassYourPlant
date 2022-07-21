@@ -3,6 +3,10 @@
     transition: 0.3s;
     width: 20%;
     margin: 2%;
+    background-color: beige;
+    padding: 10px;
+    border-radius: 15px 40px; 
+    
   }
   
   .plantcard:hover {
