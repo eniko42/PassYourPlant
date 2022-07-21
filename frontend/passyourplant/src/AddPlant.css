@@ -1,0 +1,27 @@
+.detailsCard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+    margin: auto;
+    display:flex;
+    flex-wrap: wrap;
+    height: 100vh;
+    padding: 20px;
+}
+
+label{
+    padding-right: 10px;
+}
+
+
+.formItem {
+    float: left;
+    margin: auto;
+    margin-bottom: 16px;
+    padding: 0 8px;
+    flex-basis: 100%;
+}
+
+.submitButton {
+    justify-content: center;
+    align-self: center;
+}
