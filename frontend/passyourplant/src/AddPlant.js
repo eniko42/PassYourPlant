@@ -29,7 +29,6 @@ handleClick(){
     render(){
         return(
         <div>
-            
             <form className="addPlantCard">
             <h1>Upload a plant you want to give away</h1>
                 <div className="formItem">

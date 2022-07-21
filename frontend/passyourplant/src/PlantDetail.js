@@ -94,7 +94,7 @@ class PlantDetail extends React.Component {
                     </div>
                     <div className="detailsCard">
                         <div className="comments">
-                            <h4>Comments <button className="timeStamp btn" onClick={this.handleAddCommentButton}>Add new Comment</button></h4>
+                            <h4>Comments <button className="btn" onClick={this.handleAddCommentButton}>Add new Comment</button></h4>
                         </div>
                     </div>
                     <div className="detailsCard">
