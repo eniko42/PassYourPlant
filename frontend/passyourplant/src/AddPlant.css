@@ -1,4 +1,4 @@
-.detailsCard {
+.addPlantCard {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 80%;
     margin: auto;
@@ -6,6 +6,10 @@
     flex-wrap: wrap;
     height: 100vh;
     padding: 20px;
+    background-color: beige;
+    border-radius: 15px 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 label{
@@ -24,4 +28,11 @@ label{
 .submitButton {
     justify-content: center;
     align-self: center;
+}
+
+.btn {
+    background-color: #31632d;
+    color: white;
+    font-size: 20px;
+    float: right; 
 }

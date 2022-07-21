@@ -29,8 +29,8 @@ handleClick(){
     render(){
         return(
         <div>
+            <form className="addPlantCard">
             <h1>Upload a plant you want to give away</h1>
-            <form className="detailsCard">
                 <div className="formItem">
                     <label htmlFor="user_name">Your name: </label>
                     <input type="text" name="user_name" id="user_name" required></input>
@@ -52,7 +52,7 @@ handleClick(){
                     <input type="text" name="contact" id="contact"></input>
                 </div>                            
                 
-                <button onClick={this.handleClick} className="submitButton" type="submit">Upload</button>     
+                <button onClick={this.handleClick} className="submitButton btn" type="submit">Upload</button>     
 
             </form>
 

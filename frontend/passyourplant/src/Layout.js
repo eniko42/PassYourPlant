@@ -1,13 +1,23 @@
 import React from "react"
 import Navbar from "./Navbar";
 import { Footer } from "./Footer";
+import "./App.css"
+
 class Layout extends React.Component {
-  render(){
+  render() {
     return (
       <>
-        <Navbar />
-        <main>{this.props.children}</main>
-        <Footer />
+
+        <main>
+
+          <div className="pageContainer">
+            <Navbar />
+            {this.props.children}
+            <Footer />
+          </div>
+
+        </main>
+
       </>
     )
   }
