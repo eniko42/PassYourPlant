@@ -63,12 +63,15 @@ class PlantDetail extends React.Component {
                     <div className="detailsCard">
                         <div className="comments">
                             <h4>Comments</h4>
-                            {comments.map((comment, id) => (
-                                <p key={id} ><em>From {comment.user_name}</em> <span className="timeStamp">At: {comment.time_stamp}</span>
-                                <br></br>{comment.message}</p>
-                            ))}
                         </div>
                     </div>
+                    
+                        {comments.map((comment, id) => (
+                            <div className="detailsCard comments">
+                            <p key={id} ><em>From {comment.user_name}</em> <span className="timeStamp">At: {comment.time_stamp}</span>
+                                <br></br>{comment.message}</p>
+                                </div>
+                        ))}
                     <Footer />
                 </div>
             );
