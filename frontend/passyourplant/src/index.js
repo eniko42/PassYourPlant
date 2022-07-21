@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import About from './About';
 import PlantDetail from './PlantDetail'
+import AddPlant from './AddPlant'
 import Layout from './Layout';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,6 +20,7 @@ root.render(
       <Route path="/" element={<Layout><App /></Layout>} />
       <Route path="about" element={<Layout><About /></Layout> }/>
       <Route path='plant-detail/:id' element={<Layout><PlantDetail /></Layout>} />
+      <Route path="add-plant" element={<Layout><AddPlant/></Layout>}></Route>
     </Routes>
   </BrowserRouter>
 );
