@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./PlantDetail.css"
 
 function withParams(Component) {
@@ -13,12 +13,21 @@ class PlantDetail extends React.Component {
         this.state = {
             plant: {},
             comments: [],
-            DataisLoaded: false
+            DataisLoaded: false,
+            id: 0,
         }
     }
 
     componentDidMount() {
         let { id } = this.props.params;
+        this.setState({
+            id: id,
+        })
+        this.getPlantById(id)
+        this.getComments(id)
+    }
+
+    getPlantById(id) {
         fetch(`/api/plants/${id}`)
             .then((res) => res.json())
             .then((json) => {
@@ -26,6 +35,9 @@ class PlantDetail extends React.Component {
                     plant: json,
                 });
             })
+    }
+
+    getComments(id) {
         fetch(`/api/plants/${id}/comments`)
             .then((res) => res.json())
             .then((json) => {
@@ -35,8 +47,31 @@ class PlantDetail extends React.Component {
                 })
             })
     }
+
+    handleAddCommentButton() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    handleClose() {
+        document.getElementById("myForm").style.display = "none";
+    }
+
+    async submit(id) {
+        this.handleClose()
+        const message = document.getElementsByName('message')[0].value
+        const userName = document.getElementsByName('user_name')[0].value
+        const data = {message: message, user_name: userName}
+        await fetch(`/api/plants/${id}/comments`,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+        this.getComments(id)
+    }
+
     render() {
-        const { DataisLoaded, plant, comments } = this.state;
+        const { DataisLoaded, plant, comments, id} = this.state;
         if (DataisLoaded) {
             return (
 
@@ -59,16 +94,27 @@ class PlantDetail extends React.Component {
                     </div>
                     <div className="detailsCard">
                         <div className="comments">
-                            <h4>Comments</h4>
+                            <h4>Comments <button className="timeStamp btn" onClick={this.handleAddCommentButton}>Add new Comment</button></h4>
                         </div>
                     </div>
-                    
-                        {comments.map((comment, id) => (
-                            <div className="detailsCard comments">
+                    <div className="detailsCard">
+                        <div className="chat-popup" id="myForm">
+                            <form className="form-container" onSubmit={(e)=> {e.preventDefault();this.submit(id)}}>
+                                <h4 >New Comment</h4>
+                                <input placeholder="Type your name" name="user_name" required></input>
+                                <textarea placeholder="Type comment.." name="message" required></textarea>
+                                <button type="submit" className="btn" >Send</button>
+                                <button type="button" className="btn cancel" onClick={this.handleClose}>Close</button>
+                            </form>
+                        </div>
+                    </div>
+                    {comments.map((comment, id) => (
+                        <div className="detailsCard comments">
                             <p key={id} ><em>From {comment.user_name}</em> <span className="timeStamp">At: {comment.time_stamp}</span>
                                 <br></br>{comment.message}</p>
-                                </div>
-                        ))}
+                        </div>
+                    ))}
+
                 </div>
             );
         }
