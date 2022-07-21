@@ -1,5 +1,27 @@
 .App {
   text-align: center;
+  
+
+}
+
+.App::after {
+  content: "";
+  background-image: url("wallpaper.jpg");
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+a:link{
+  color:black;
+}
+
+a:visited{
+  color:black;
 }
 
 .logos{
