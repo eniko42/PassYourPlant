@@ -1,8 +1,6 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import "./PlantDetail.css"
-import Navbar from "./Navbar";
-import { Footer } from "./Footer";
 
 function withParams(Component) {
     return props => <Component {...props} params={useParams()} />;
@@ -43,7 +41,6 @@ class PlantDetail extends React.Component {
             return (
 
                 <div className="details">
-                    <Navbar />
                     <div className="detailsCard">
                         <h2 className="detailsName">{plant.plant_name}</h2>
                         <div className="row">
@@ -72,7 +69,6 @@ class PlantDetail extends React.Component {
                                 <br></br>{comment.message}</p>
                                 </div>
                         ))}
-                    <Footer />
                 </div>
             );
         }
