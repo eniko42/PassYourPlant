@@ -13,9 +13,10 @@ function Navbar() {
       <li className="nav-item active">
         <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
       </li>
-      <li className="nav-item active">
-        <Link to="add-plant">Add plant</Link>
-      </li>
+      {/* <li className="nav-item active">
+        
+      </li> */}
+      <Link className="nav-link" to="add-plant">Add plant</Link>
       <Link className="nav-link" to="/about">About us</Link>
     </ul>
   </div>
