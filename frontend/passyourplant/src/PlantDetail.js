@@ -103,8 +103,8 @@ class PlantDetail extends React.Component {
                                 <h4 >New Comment</h4>
                                 <input placeholder="Type your name" name="user_name" required></input>
                                 <textarea placeholder="Type comment.." name="message" required></textarea>
-                                <button type="submit" className="btn" >Send</button>
-                                <button type="button" className="btn cancel" onClick={this.handleClose}>Close</button>
+                                <button type="submit" className="send" >Send</button>
+                                <button type="button" className="cancel" onClick={this.handleClose}>Close</button>
                             </form>
                         </div>
                     </div>
