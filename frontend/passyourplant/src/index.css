@@ -14,4 +14,9 @@ code {
 
 footer {
   text-align: center;
+  background-color: aliceblue;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
