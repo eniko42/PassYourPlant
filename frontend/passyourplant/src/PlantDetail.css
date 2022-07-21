@@ -1,0 +1,39 @@
+.details {
+    text-align: center;
+}
+
+.detailsName {
+    text-align: center;
+    padding: 5%
+}
+
+.detailsPicture {
+    width: 200%;
+}
+
+.detailsCard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+    margin: auto;
+}
+
+.texts {
+    text-align: right;
+}
+
+.column {
+    float: left;
+    margin: auto;
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
+
+.comments {
+    text-align: left;
+    padding: 3%;
+}
+
+.timeStamp {
+    float: right;
+    font-size: small;
+}
