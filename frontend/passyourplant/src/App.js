@@ -36,7 +36,6 @@ class App extends React.Component {
     </div>
     return (
       <div className="App">
-        <Navbar />
         <header className="App-header">
 
           <Title title={this.state.title}></Title>
@@ -51,8 +50,6 @@ class App extends React.Component {
             <Card key={idx} plant={plant} />
           ))}
         </div>
-
-        <Footer />
 
 
       </div>
