@@ -80,7 +80,7 @@ class PlantDetail extends React.Component {
                         <h2 className="detailsName">{plant.plant_name}</h2>
                         <div className="row">
                             <div className="column">
-                                <img className="detailsPicture" src={require("./logo192.png")} alt="nice plant"></img>
+                                <img className="detailsPicture" src={ require(`./${plant.photo}`) }  alt="nice plant"></img>
                             </div>
                             <div className="column">
                                 <div className="texts">
@@ -88,6 +88,7 @@ class PlantDetail extends React.Component {
                                     <p>Description: {plant.description}</p>
                                     <p>Location: {plant.location}</p>
                                     <p>Contact info: {plant.contact}</p>
+                                    <p>Photo: {plant.photo}</p>
                                 </div>
                             </div>
                         </div>
