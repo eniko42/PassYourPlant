@@ -11,6 +11,7 @@ function handleClick(){
     const desc = document.getElementById("desc").value;
     const loc = document.getElementById("loc").value;
     const contact = document.getElementById("contact").value;
+    const photo = document.getElementById("photo").value;
     
     fetch('api/plants', {
         method: "POST",
@@ -19,7 +20,7 @@ function handleClick(){
             "user_name": userName,
             "plant_name": plantName,
             "description": desc,
-            "photo": "test_plant.jpg",
+            "photo": photo,
             "location": loc,
             "contact": contact,
             "available": true    
@@ -52,7 +53,11 @@ function handleClick(){
                 <div className="formItem">
                     <label htmlFor="contact">Contact info: </label>
                     <input type="text" name="contact" id="contact"></input>
-                </div>                            
+                </div>
+                <div className="formItem">
+                    <label htmlFor="contact">Photo: </label>
+                    <input type="text" name="photo" id="photo"></input>
+                </div>                          
                 
                 <button onClick={handleClick} className="submitButton btn" type="submit">Upload</button>     
 
