@@ -6,7 +6,8 @@ export function Card(props) {
 
     return (
         <div className="plantcard">
-            <img src={ require(`./${props.plant.photo}`) } alt={props.plant.photo} ></img>
+            <img src={ require(`./${props.plant.photo}`) } 
+            width="200" height="300" alt={props.plant.photo} ></img>
             <div className="cardcontainer">
                 <Link to={`/plant-detail/${props.plant.id}`}><h4><b>{props.plant.plant_name}</b></h4></Link>
             </div>
