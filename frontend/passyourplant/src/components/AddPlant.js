@@ -1,5 +1,5 @@
 import React from "react"
-import "./AddPlant.css"
+import "../style/AddPlant.css"
 import { useNavigate } from 'react-router-dom';
 
 export function AddPlant(){
@@ -25,7 +25,7 @@ function handleClick(){
             "contact": contact,
             "available": true    
            })
-    }).then(navigate('/', ));
+    }).then(navigate('/'));
     
 }
 

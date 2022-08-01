@@ -1,7 +1,7 @@
 import React from "react"
 import Navbar from "./Navbar";
 import { Footer } from "./Footer";
-import "./App.css"
+import "../style/App.css"
 
 class Layout extends React.Component {
   render() {

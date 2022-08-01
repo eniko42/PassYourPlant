@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './style/index.css';
+import App from './components/App';
+import reportWebVitals from './components/reportWebVitals';
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
-import About from './About';
-import PlantDetail from './PlantDetail';
-import {AddPlant} from './AddPlant';
-import Layout from './Layout';
+import About from './components/About';
+import PlantDetail from './components/PlantDetail';
+import {AddPlant} from './components/AddPlant';
+import Layout from './components/Layout';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,7 +20,7 @@ root.render(
       <Route path="/" element={<Layout><App /></Layout>} />
       <Route path="about" element={<Layout><About /></Layout> }/>
       <Route path='plant-detail/:id' element={<Layout><PlantDetail /></Layout>} />
-      <Route path="add-plant" element={<Layout><AddPlant/></Layout>}></Route>
+      <Route path="add-plant" element={<Layout><AddPlant/></Layout>}/>
     </Routes>
   </BrowserRouter>
 );
