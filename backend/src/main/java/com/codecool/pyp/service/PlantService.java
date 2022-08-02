@@ -15,17 +15,15 @@ public class PlantService {
     PlantRepository plantRepository;
 
     public List<Plant> getAllPlants() {
-        List<Plant> plants = new ArrayList<>();
-        plantRepository.findAll().forEach(plants::add);
-        return plants;
+        return plantRepository.findAll();
     }
 
-    public Plant getPlant(int id) {
+    public Plant getPlant(Long id) {
         return plantRepository.findById(id).isPresent()
                 ? plantRepository.findById(id).get() : null;
     }
 
-    public void deletePlant(int id) {
+    public void deletePlant(Long id) {
         plantRepository.deleteById(id);
     }
 
