@@ -6,15 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class CommentController {
-    @Autowired
-    private CommentService commentService;
 
-    @GetMapping("/api/plants/{id}/comments")
-    private List<Comment> getComments(@PathVariable String id) {
-        return commentService.getComments(id);
+
+    private final CommentService commentService;
+
+    @Autowired
+    public CommentController (CommentService commentService) {
+        this.commentService = commentService;
+    }
+
+    @GetMapping("/api/plants/{plant-id}/comments")
+    private Set<Comment> getComments(@PathVariable("plant-id") Long plantId) {
+        return commentService.getComments(plantId);
     }
 
     @PostMapping("/api/plants/{id}/comments")
