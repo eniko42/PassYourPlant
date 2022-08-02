@@ -1,11 +1,14 @@
 package com.codecool.pyp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 public class Plant {
 
@@ -31,45 +34,7 @@ public class Plant {
 
     private boolean available;
 
-    public int getId() {
-        return id;
-    }
-
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPlantName() {
-        return plantName;
-    }
-
-    public void setPlantName(String plantName) {
-        this.plantName = plantName;
-    }
+    @OneToMany(mappedBy = "plant")
+    private Set<Comment> comments = new HashSet<>();
 
 }
