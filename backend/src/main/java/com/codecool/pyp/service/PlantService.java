@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class PlantService {
 
+    private final PlantRepository plantRepository;
+
     @Autowired
-    PlantRepository plantRepository;
+    public PlantService(PlantRepository plantRepository) {
+        this.plantRepository = plantRepository;
+    }
 
     public List<Plant> getAllPlants() {
         return plantRepository.findAll();
