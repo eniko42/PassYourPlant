@@ -6,20 +6,18 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table
 public class Comment {
+
     @Id
-    @Column
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
-    @JsonProperty("plant_id")
-    @Column(name = "plant_id")
-    private int plantId;
-    @Column
+    private Long id;
+
     private String message;
+
     @JsonProperty("user_name")
     @Column(name = "user_name")
     private String userName;
+
     @JsonProperty("time_stamp")
     @Column(name = "time_stamp")
     private LocalDate timeStamp;
