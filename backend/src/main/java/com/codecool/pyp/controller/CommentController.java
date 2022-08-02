@@ -24,18 +24,18 @@ public class CommentController {
         return commentService.getComments(plantId);
     }
 
-    @PostMapping("/api/plants/{id}/comments")
-    private void addComment(@RequestBody Comment comment, @PathVariable String id) {
-        commentService.addOrUpdateComment(comment, id);
+    @PostMapping("/api/plants/{plant-id}/comments")
+    private void addComment(@RequestBody Comment comment, @PathVariable("plant-id") Long plantId) {
+        commentService.addOrUpdateComment(comment, plantId);
     }
 
-    @PutMapping("/api/plants/{id}/comments")
-    private void updateComment(@RequestBody Comment comment, @PathVariable String id) {
-        commentService.addOrUpdateComment(comment, id);
+    @PutMapping("/api/plants/{plant-id}/comments")
+    private void updateComment(@RequestBody Comment comment, @PathVariable("plant-id") Long plantId) {
+        commentService.addOrUpdateComment(comment, plantId);
     }
 
-    @DeleteMapping("/api/plants/{id}/comments")
-    private void deleteComment(@RequestBody Comment comment, @PathVariable String id) {
-        commentService.deleteComment(comment, id);
+    @DeleteMapping("/api/plants/{plant-id}/comments")
+    private void deleteComment(@RequestBody Comment comment, @PathVariable("plant-id") Long plantId) {
+        commentService.deleteComment(comment, plantId);
     }
 }
