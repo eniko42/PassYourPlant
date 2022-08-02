@@ -11,21 +11,23 @@ import java.util.List;
 @Service
 public class PlantService {
 
-    @Autowired
-    PlantRepository plantRepository;
+    private final PlantRepository plantRepository;
 
-    public List<Plant> getAllPlants() {
-        List<Plant> plants = new ArrayList<>();
-        plantRepository.findAll().forEach(plants::add);
-        return plants;
+    @Autowired
+    public PlantService(PlantRepository plantRepository) {
+        this.plantRepository = plantRepository;
     }
 
-    public Plant getPlant(int id) {
+    public List<Plant> getAllPlants() {
+        return plantRepository.findAll();
+    }
+
+    public Plant getPlant(Long id) {
         return plantRepository.findById(id).isPresent()
                 ? plantRepository.findById(id).get() : null;
     }
 
-    public void deletePlant(int id) {
+    public void deletePlant(Long id) {
         plantRepository.deleteById(id);
     }
 

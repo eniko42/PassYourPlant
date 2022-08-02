@@ -6,29 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class CommentController {
+
+
+    private final CommentService commentService;
+
     @Autowired
-    private CommentService commentService;
-
-    @GetMapping("/api/plants/{id}/comments")
-    private List<Comment> getComments(@PathVariable String id) {
-        return commentService.getComments(id);
+    public CommentController (CommentService commentService) {
+        this.commentService = commentService;
     }
 
-    @PostMapping("/api/plants/{id}/comments")
-    private void addComment(@RequestBody Comment comment, @PathVariable String id) {
-        commentService.addOrUpdateComment(comment, id);
+    @GetMapping("/api/plants/{plant-id}/comments")
+    private Set<Comment> getComments(@PathVariable("plant-id") Long plantId) {
+        return commentService.getComments(plantId);
     }
 
-    @PutMapping("/api/plants/{id}/comments")
-    private void updateComment(@RequestBody Comment comment, @PathVariable String id) {
-        commentService.addOrUpdateComment(comment, id);
+    @PostMapping("/api/plants/{plant-id}/comments")
+    private void addComment(@RequestBody Comment comment, @PathVariable("plant-id") Long plantId) {
+        commentService.addOrUpdateComment(comment, plantId);
     }
 
-    @DeleteMapping("/api/plants/{id}/comments")
-    private void deleteComment(@RequestBody Comment comment, @PathVariable String id) {
-        commentService.deleteComment(comment, id);
+    @PutMapping("/api/plants/{plant-id}/comments")
+    private void updateComment(@RequestBody Comment comment, @PathVariable("plant-id") Long plantId) {
+        commentService.addOrUpdateComment(comment, plantId);
+    }
+
+    @DeleteMapping("/api/plants/{plant-id}/comments")
+    private void deleteComment(@RequestBody Comment comment, @PathVariable("plant-id") Long plantId) {
+        commentService.deleteComment(comment, plantId);
     }
 }
