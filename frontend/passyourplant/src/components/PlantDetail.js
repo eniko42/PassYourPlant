@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import React from "react";
-import "./PlantDetail.css"
+import "../style/PlantDetail.css"
+
 
 function withParams(Component) {
     return props => <Component {...props} params={useParams()} />;
@@ -23,7 +24,10 @@ class PlantDetail extends React.Component {
         this.setState({
             id: id,
         })
-        this.getPlantById(id)
+        const json = this.getPlantById(id);
+        this.setState({
+            plant: json,
+        })
         this.getComments(id)
     }
 
@@ -36,6 +40,8 @@ class PlantDetail extends React.Component {
                 });
             })
     }
+
+ 
 
     getComments(id) {
         fetch(`/api/plants/${id}/comments`)
@@ -80,7 +86,7 @@ class PlantDetail extends React.Component {
                         <h2 className="detailsName">{plant.plant_name}</h2>
                         <div className="row">
                             <div className="column">
-                                <img className="detailsPicture" src={ require(`./${plant.photo}`) }  alt="nice plant"></img>
+                                <img className="detailsPicture" src={ require(`/src/images/${plant.photo}`) }  alt="nice plant"></img>
                             </div>
                             <div className="column">
                                 <div className="texts">
