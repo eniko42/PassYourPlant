@@ -34,7 +34,7 @@ public class Plant {
 
     private boolean available;
 
-    @OneToMany(mappedBy = "plant")
+    @OneToMany(mappedBy = "plant", cascade = CascadeType.REMOVE)
     private Set<Comment> comments = new HashSet<>();
 
 }
