@@ -19,12 +19,12 @@ public class PlantController {
     }
 
     @GetMapping("/api/plants/{id}")
-    private Plant getPlant(@PathVariable ("id") int id){
+    private Plant getPlant(@PathVariable ("id") Long id){
         return plantService.getPlant(id);
     }
 
     @DeleteMapping("/api/plants/{id}")
-    private void deletePlant(@PathVariable ("id") int id){
+    private void deletePlant(@PathVariable ("id") Long id){
         plantService.deletePlant(id);
     }
 
