@@ -5,7 +5,6 @@ import com.codecool.pyp.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -21,7 +20,7 @@ public class CommentController {
 
     @GetMapping("/api/plants/{plant-id}/comments")
     private Set<Comment> getComments(@PathVariable("plant-id") Long plantId) {
-        return commentService.getComments(plantId);
+        return commentService.getCommentsByPlantId(plantId);
     }
 
     @PostMapping("/api/plants/{plant-id}/comments")

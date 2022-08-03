@@ -23,7 +23,7 @@ public class CommentService {
         this.plantRepository = plantRepository;
     }
 
-    public Set<Comment> getComments(Long plantId) {
+    public Set<Comment> getCommentsByPlantId(Long plantId) {
         Plant plant = getPlantById(plantId);
         return plant.getComments();
     }
