@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -37,4 +38,18 @@ public class Plant {
     @OneToMany(mappedBy = "plant")
     private Set<Comment> comments = new HashSet<>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Plant)) return false;
+        Plant plant = (Plant) o;
+        return available == plant.available && id.equals(plant.id) && userName.equals(plant.userName) &&
+                plantName.equals(plant.plantName) && description.equals(plant.description) && photo.equals(plant.photo)
+                && location.equals(plant.location) && contact.equals(plant.contact);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userName, plantName, description, photo, location, contact, available);
+    }
 }
