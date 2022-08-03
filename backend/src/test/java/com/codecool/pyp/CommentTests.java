@@ -5,7 +5,6 @@ import com.codecool.pyp.model.Plant;
 import com.codecool.pyp.service.CommentService;
 import com.codecool.pyp.storage.CommentRepository;
 import com.codecool.pyp.storage.PlantRepository;
-import org.hibernate.Hibernate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -76,9 +75,15 @@ public class CommentTests {
     }
 
     @Test
-    public void getCommentsByPlantId(){
+    public void getCommentsByPlantIdTest(){
         Set<Comment> comments = new HashSet<>();
         comments.add(comment);
         Assertions.assertEquals(comments, commentService.getCommentsByPlantId(plant.getId()));
+    }
+
+    @Test
+    public void deleteCommentTest(){
+        commentService.deleteComment(comment);
+        Assertions.assertTrue(commentRepository.findById(comment.getId()).isEmpty());
     }
 }
