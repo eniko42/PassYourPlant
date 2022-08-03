@@ -93,3 +93,13 @@ a:visited{
     transform: translateX(0%);
   }
 }
+
+i {
+  float: right;
+  padding: 5px;
+  font-size: 25px;
+}
+
+i:hover {
+  background: #bceabc;
+}
