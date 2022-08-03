@@ -45,11 +45,11 @@ public class Plant {
         Plant plant = (Plant) o;
         return available == plant.available && id.equals(plant.id) && userName.equals(plant.userName) &&
                 plantName.equals(plant.plantName) && description.equals(plant.description) && photo.equals(plant.photo)
-                && location.equals(plant.location) && contact.equals(plant.contact);
+                && location.equals(plant.location) && contact.equals(plant.contact) && comments.equals(plant.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, plantName, description, photo, location, contact, available);
+        return Objects.hash(id, userName, plantName, description, photo, location, contact, available, comments);
     }
 }
