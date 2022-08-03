@@ -83,10 +83,10 @@ class PlantDetail extends React.Component {
 
                 <div className="details">
                     <div className="detailsCard">
-                        <h2 className="detailsName">{plant.plant_name}</h2>
+                        <h2 className="detailsName">{plant.plant_name} <i className="fa fa-trash" aria-hidden="true"/></h2>
                         <div className="row">
                             <div className="column">
-                                <img className="detailsPicture" src={ require(`/src/images/${plant.photo}`) }  alt="nice plant"></img>
+                                <img className="detailsPicture" src={require(`/src/images/${plant.photo}`)}  alt="nice plant"/>
                             </div>
                             <div className="column">
                                 <div className="texts">
