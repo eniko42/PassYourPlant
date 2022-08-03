@@ -24,10 +24,7 @@ class PlantDetail extends React.Component {
         this.setState({
             id: id,
         })
-        const json = this.getPlantById(id);
-        this.setState({
-            plant: json,
-        })
+        this.getPlantById(id);
         this.getComments(id)
     }
 
@@ -40,8 +37,6 @@ class PlantDetail extends React.Component {
                 });
             })
     }
-
- 
 
     getComments(id) {
         fetch(`/api/plants/${id}/comments`)
@@ -72,6 +67,14 @@ class PlantDetail extends React.Component {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
+            })
+        this.getComments(id)
+    }
+
+    async deleteEntity(id, url) {
+        await fetch(url,
+            {
+                method: "DELETE"
             })
         this.getComments(id)
     }
@@ -115,9 +118,9 @@ class PlantDetail extends React.Component {
                             </form>
                         </div>
                     </div>
-                    {comments.map((comment, id) => (
+                    {comments.map((comment, commentId) => (
                         <div className="detailsCard comments">
-                            <p key={id} ><em>From {comment.user_name}</em> <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" />
+                            <p key={commentId} ><em>From {comment.user_name}</em> <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" onClick={()=> {this.deleteEntity(id, `/api/plants/comments/${comment.id}`)}}/>
                                 <br/>{comment.message}</p>
                             <span className="timeStamp">At: {comment.time_stamp}</span>
                         </div>
@@ -127,6 +130,7 @@ class PlantDetail extends React.Component {
             );
         }
     }
+
 
 }
 export default withParams(PlantDetail)
