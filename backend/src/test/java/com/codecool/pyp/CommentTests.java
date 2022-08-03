@@ -15,7 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootTest
@@ -93,5 +95,12 @@ public class CommentTests {
     public void deleteCommentTest(){
         commentService.deleteComment(comment);
         Assertions.assertTrue(commentRepository.findById(comment.getId()).isEmpty());
+    }
+
+    @Test
+    public void getAllCommentsTest(){
+        List<Comment> comments = new ArrayList<>();
+        comments.add(comment);
+        Assertions.assertEquals(commentService.getAllComments(), comments);
     }
 }
