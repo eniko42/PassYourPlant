@@ -5,6 +5,7 @@ import com.codecool.pyp.model.Plant;
 import com.codecool.pyp.service.CommentService;
 import com.codecool.pyp.storage.CommentRepository;
 import com.codecool.pyp.storage.PlantRepository;
+import org.hibernate.Hibernate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,12 +14,14 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
+@Transactional
 public class CommentTests {
 
     private final CommentRepository commentRepository;
@@ -65,5 +68,12 @@ public class CommentTests {
     @Test
     public void getPlantByIdTest(){
         Assertions.assertEquals(plant, commentService.getPlantById(plant.getId()));
+    }
+
+    @Test
+    public void getCommentsByPlantId(){
+        Set<Comment> comments = new HashSet<>();
+        comments.add(comment);
+        Assertions.assertEquals(comments, commentService.getCommentsByPlantId(plant.getId()));
     }
 }
