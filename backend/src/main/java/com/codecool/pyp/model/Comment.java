@@ -2,8 +2,7 @@ package com.codecool.pyp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +10,9 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Comment {
 
     @Id
@@ -31,4 +33,5 @@ public class Comment {
     @JoinColumn(name = "plant_id")
     @JsonIgnore
     private Plant plant;
+
 }
