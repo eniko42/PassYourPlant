@@ -5,11 +5,15 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Plant {
 
     @Id
@@ -37,4 +41,16 @@ public class Plant {
     @OneToMany(mappedBy = "plant", cascade = CascadeType.REMOVE)
     private Set<Comment> comments = new HashSet<>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Plant plant = (Plant) o;
+        return available == plant.available && Objects.equals(id, plant.id) && Objects.equals(userName, plant.userName) && Objects.equals(plantName, plant.plantName) && Objects.equals(description, plant.description) && Objects.equals(photo, plant.photo) && Objects.equals(location, plant.location) && Objects.equals(contact, plant.contact);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userName, plantName, description, photo, location, contact, available, comments);
+    }
 }
