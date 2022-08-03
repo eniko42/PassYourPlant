@@ -41,6 +41,6 @@ public class CommentController {
 
     @DeleteMapping("/api/plants/{plant-id}/comments")
     private void deleteComment(@RequestBody Comment comment, @PathVariable("plant-id") Long plantId) {
-        commentService.deleteComment(comment, plantId);
+        commentService.deleteComment(comment);
     }
 }

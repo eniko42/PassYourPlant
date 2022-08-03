@@ -41,8 +41,7 @@ public class CommentService {
     }
 
 
-    public void deleteComment(Comment comment, Long plantId) {
-        comment.setPlant(getPlantById(plantId));
+    public void deleteComment(Comment comment) {
         commentRepository.delete(comment);
     }
 
