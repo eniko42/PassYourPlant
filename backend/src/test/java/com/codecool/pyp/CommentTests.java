@@ -70,6 +70,14 @@ public class CommentTests {
     }
 
     @Test
+    public void updateCommentTest(){
+        commentService.addOrUpdateComment(comment, plant.getId());
+        comment.setMessage("updated message");
+        commentService.addOrUpdateComment(comment, plant.getId());
+        Assertions.assertEquals(commentRepository.findById(comment.getId()).get().getMessage(), "updated message");
+    }
+
+    @Test
     public void getPlantByIdTest(){
         Assertions.assertEquals(plant, commentService.getPlantById(plant.getId()));
     }
