@@ -83,7 +83,7 @@ class PlantDetail extends React.Component {
 
                 <div className="details">
                     <div className="detailsCard">
-                        <h2 className="detailsName">{plant.plant_name} <i className="fa fa-trash" aria-hidden="true"/></h2>
+                        <h2 className="detailsName">{plant.plant_name}</h2>
                         <div className="row">
                             <div className="column">
                                 <img className="detailsPicture" src={require(`/src/images/${plant.photo}`)}  alt="nice plant"/>
@@ -108,8 +108,8 @@ class PlantDetail extends React.Component {
                         <div className="chat-popup" id="myForm">
                             <form className="form-container" onSubmit={(e)=> {e.preventDefault();this.submit(id)}}>
                                 <h4 >New Comment</h4>
-                                <input placeholder="Type your name" name="user_name" required></input>
-                                <textarea placeholder="Type comment.." name="message" required></textarea>
+                                <input placeholder="Type your name" name="user_name" required/>
+                                <textarea placeholder="Type comment.." name="message" required/>
                                 <button type="submit" className="send" >Send</button>
                                 <button type="button" className="cancel" onClick={this.handleClose}>Close</button>
                             </form>
@@ -117,8 +117,9 @@ class PlantDetail extends React.Component {
                     </div>
                     {comments.map((comment, id) => (
                         <div className="detailsCard comments">
-                            <p key={id} ><em>From {comment.user_name}</em> <span className="timeStamp">At: {comment.time_stamp}</span>
-                                <br></br>{comment.message}</p>
+                            <p key={id} ><em>From {comment.user_name}</em> <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" />
+                                <br/>{comment.message}</p>
+                            <span className="timeStamp">At: {comment.time_stamp}</span>
                         </div>
                     ))}
 
