@@ -61,4 +61,9 @@ public class CommentTests {
         commentService.addOrUpdateComment(comment, plant.getId());
         Assertions.assertTrue(commentRepository.findById(comment.getId()).isPresent());
     }
+
+    @Test
+    public void getPlantByIdTest(){
+        Assertions.assertEquals(plant, commentService.getPlantById(plant.getId()));
+    }
 }
