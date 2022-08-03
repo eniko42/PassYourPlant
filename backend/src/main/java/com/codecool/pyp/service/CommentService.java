@@ -24,12 +24,12 @@ public class CommentService {
         this.plantRepository = plantRepository;
     }
 
-    public Set<Comment> getComments(Long plantId) {
+    public Set<Comment> getCommentsByPlantId(Long plantId) {
         Plant plant = getPlantById(plantId);
         return plant.getComments();
     }
 
-    private Plant getPlantById(Long plantId) {
+    public Plant getPlantById(Long plantId) {
         return plantRepository.findById(plantId).orElseThrow(()-> new NoSuchElementException("Not find plant with given id: " + plantId));
     }
 

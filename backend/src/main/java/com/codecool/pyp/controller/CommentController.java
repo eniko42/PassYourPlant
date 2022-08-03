@@ -26,7 +26,7 @@ public class CommentController {
 
     @GetMapping("/api/plants/{plant-id}/comments")
     private Set<Comment> getComments(@PathVariable("plant-id") Long plantId) {
-        return commentService.getComments(plantId);
+        return commentService.getCommentsByPlantId(plantId);
     }
 
     @PostMapping("/api/plants/{plant-id}/comments")
