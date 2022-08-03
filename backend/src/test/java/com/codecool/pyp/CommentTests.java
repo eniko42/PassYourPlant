@@ -57,6 +57,11 @@ public class CommentTests {
                 .userName("Dia")
                 .build();
         commentRepository.save(comment);
+
+        Set<Comment> comments = new HashSet<>();
+        comments.add(comment);
+        plant.setComments(comments);
+        plantRepository.save(plant);
     }
 
     @Test
