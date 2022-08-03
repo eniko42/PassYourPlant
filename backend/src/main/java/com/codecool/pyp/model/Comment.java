@@ -1,5 +1,6 @@
 package com.codecool.pyp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -30,6 +31,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "plant_id")
+    @JsonIgnore
     private Plant plant;
 
 }

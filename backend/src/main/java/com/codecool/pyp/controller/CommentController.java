@@ -18,6 +18,11 @@ public class CommentController {
         this.commentService = commentService;
     }
 
+    @GetMapping("api/plant/comments")
+    private List<Comment> getAllComments(){
+        return commentService.getAllComments();
+    }
+
     @GetMapping("/api/plants/{plant-id}/comments")
     private Set<Comment> getComments(@PathVariable("plant-id") Long plantId) {
         return commentService.getCommentsByPlantId(plantId);

@@ -11,6 +11,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Plant {
 
     @Id
@@ -35,17 +38,18 @@ public class Plant {
 
     private boolean available;
 
-    @OneToMany(mappedBy = "plant")
+    @OneToMany(mappedBy = "plant", cascade = CascadeType.REMOVE)
     private Set<Comment> comments = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Plant)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Plant plant = (Plant) o;
-        return available == plant.available && id.equals(plant.id) && userName.equals(plant.userName) &&
-                plantName.equals(plant.plantName) && description.equals(plant.description) && photo.equals(plant.photo)
-                && location.equals(plant.location) && contact.equals(plant.contact) && comments.equals(plant.comments);
+        return available == plant.available && Objects.equals(id, plant.id) && Objects.equals(userName, plant.userName)
+                && Objects.equals(plantName, plant.plantName) && Objects.equals(description, plant.description)
+                && Objects.equals(photo, plant.photo) && Objects.equals(location, plant.location)
+                && Objects.equals(contact, plant.contact) && comments.equals(plant.comments);
     }
 
     @Override
