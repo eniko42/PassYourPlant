@@ -1,14 +1,15 @@
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import React from "react";
 import "../style/PlantDetail.css"
-
+import { useNavigate } from "react-router-dom";
 
 function withParams(Component) {
-    return props => <Component {...props} params={useParams()} />;
+    return props => <Component {...props} params={useParams()} navigation={useNavigate()} />;
 }
 
 
 class PlantDetail extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -21,13 +22,11 @@ class PlantDetail extends React.Component {
 
     componentDidMount() {
         let { id } = this.props.params;
+        const navigation  = this.props.navigation;
         this.setState({
             id: id,
         })
-        const json = this.getPlantById(id);
-        this.setState({
-            plant: json,
-        })
+        this.getPlantById(id);
         this.getComments(id)
     }
 
@@ -40,8 +39,6 @@ class PlantDetail extends React.Component {
                 });
             })
     }
-
- 
 
     getComments(id) {
         fetch(`/api/plants/${id}/comments`)
@@ -76,17 +73,25 @@ class PlantDetail extends React.Component {
         this.getComments(id)
     }
 
+    async deleteEntity(id, url) {
+        await fetch(url,
+            {
+                method: "DELETE"
+            })
+    }
+
     render() {
         const { DataisLoaded, plant, comments, id} = this.state;
+        const navigation = this.props.navigation;
         if (DataisLoaded) {
             return (
 
                 <div className="details">
                     <div className="detailsCard">
-                        <h2 className="detailsName">{plant.plant_name}</h2>
+                        <h2 className="detailsName">{plant.plant_name} <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" onClick={() => {this.deleteEntity(id, `/api/plants/${id}`).then(navigation("/")); }}/> </h2>
                         <div className="row">
                             <div className="column">
-                                <img className="detailsPicture" src={ require(`/src/images/${plant.photo}`) }  alt="nice plant"></img>
+                                <img className="detailsPicture" src={require(`/src/images/${plant.photo}`)}  alt="nice plant"/>
                             </div>
                             <div className="column">
                                 <div className="texts">
@@ -108,17 +113,18 @@ class PlantDetail extends React.Component {
                         <div className="chat-popup" id="myForm">
                             <form className="form-container" onSubmit={(e)=> {e.preventDefault();this.submit(id)}}>
                                 <h4 >New Comment</h4>
-                                <input placeholder="Type your name" name="user_name" required></input>
-                                <textarea placeholder="Type comment.." name="message" required></textarea>
+                                <input placeholder="Type your name" name="user_name" required/>
+                                <textarea placeholder="Type comment.." name="message" required/>
                                 <button type="submit" className="send" >Send</button>
                                 <button type="button" className="cancel" onClick={this.handleClose}>Close</button>
                             </form>
                         </div>
                     </div>
-                    {comments.map((comment, id) => (
+                    {comments.map((comment, commentId) => (
                         <div className="detailsCard comments">
-                            <p key={id} ><em>From {comment.user_name}</em> <span className="timeStamp">At: {comment.time_stamp}</span>
-                                <br></br>{comment.message}</p>
+                            <p key={commentId} ><em>From {comment.user_name}</em> <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" onClick={()=> {this.deleteEntity(id, `/api/plants/comments/${comment.id}`);this.getComments(id)}}/>
+                                <br/>{comment.message}</p>
+                            <span className="timeStamp">At: {comment.time_stamp}</span>
                         </div>
                     ))}
 
@@ -126,6 +132,7 @@ class PlantDetail extends React.Component {
             );
         }
     }
+
 
 }
 export default withParams(PlantDetail)

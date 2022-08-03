@@ -41,7 +41,8 @@ public class CommentService {
     }
 
 
-    public void deleteComment(Comment comment) {
+    public void deleteComment(Long commentId) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()-> new NoSuchElementException("There is no comment with given id: " + commentId));
         commentRepository.delete(comment);
     }
 
