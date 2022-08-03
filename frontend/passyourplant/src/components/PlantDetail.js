@@ -1,14 +1,15 @@
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import React from "react";
 import "../style/PlantDetail.css"
-
+import { useNavigate } from "react-router-dom";
 
 function withParams(Component) {
-    return props => <Component {...props} params={useParams()} />;
+    return props => <Component {...props} params={useParams()} navigation={useNavigate()} />;
 }
 
 
 class PlantDetail extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -21,6 +22,7 @@ class PlantDetail extends React.Component {
 
     componentDidMount() {
         let { id } = this.props.params;
+        const navigation  = this.props.navigation;
         this.setState({
             id: id,
         })
@@ -76,17 +78,17 @@ class PlantDetail extends React.Component {
             {
                 method: "DELETE"
             })
-        this.getComments(id)
     }
 
     render() {
         const { DataisLoaded, plant, comments, id} = this.state;
+        const navigation = this.props.navigation;
         if (DataisLoaded) {
             return (
 
                 <div className="details">
                     <div className="detailsCard">
-                        <h2 className="detailsName">{plant.plant_name}</h2>
+                        <h2 className="detailsName">{plant.plant_name} <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" onClick={() => {this.deleteEntity(id, `/api/plants/${id}`).then(navigation("/")); }}/> </h2>
                         <div className="row">
                             <div className="column">
                                 <img className="detailsPicture" src={require(`/src/images/${plant.photo}`)}  alt="nice plant"/>
@@ -120,7 +122,7 @@ class PlantDetail extends React.Component {
                     </div>
                     {comments.map((comment, commentId) => (
                         <div className="detailsCard comments">
-                            <p key={commentId} ><em>From {comment.user_name}</em> <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" onClick={()=> {this.deleteEntity(id, `/api/plants/comments/${comment.id}`)}}/>
+                            <p key={commentId} ><em>From {comment.user_name}</em> <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" onClick={()=> {this.deleteEntity(id, `/api/plants/comments/${comment.id}`);this.getComments(id)}}/>
                                 <br/>{comment.message}</p>
                             <span className="timeStamp">At: {comment.time_stamp}</span>
                         </div>
