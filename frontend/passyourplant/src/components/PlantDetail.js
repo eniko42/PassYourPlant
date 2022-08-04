@@ -53,11 +53,22 @@ class PlantDetail extends React.Component {
             })
     }
 
-    updateEntity(commentId) {
-        const message = "Hacked your message"
-        const userName = "Evil hacker"
-        const data = {id: commentId, message: message, user_name: userName}
-        fetch(`/api/plants/${this.state.plant.id}/comments`,
+
+    handleAddCommentButton() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    handleUpdateCommentButton(commentId) {
+        let updateElement = document.getElementById(commentId);
+        updateElement.style.display = 'block';
+    }
+
+    updateComment(commentId, plantId, userName) {
+        this.handleUpdateCommentButton(commentId);
+        const message = document.getElementById(commentId + plantId).value;
+        const data = {id: commentId, message: message, user_name: userName};
+
+        fetch(`/api/plants/${plantId}/comments`,
             {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
@@ -66,15 +77,18 @@ class PlantDetail extends React.Component {
             .then(function (response) {
 
                 if (response.status === 200) {
-
                     console.log("successfully changed comment");
+
                 }
 
-            }).then(()=> this.getComments(this.state.plant.id));
+            }).then(()=> this.getCommentsAndCloseMessageInput(plantId, commentId));
+
     }
 
-    handleAddCommentButton() {
-        document.getElementById("myForm").style.display = "block";
+    getCommentsAndCloseMessageInput(plantId, commentId){
+        let updateElement = document.getElementById(commentId);
+        updateElement.style.display = 'none';
+        this.getComments(plantId);
     }
 
     handleClose() {
@@ -142,9 +156,17 @@ class PlantDetail extends React.Component {
                     {comments.map((comment, id) => (
                         <div className="detailsCard comments">
                             <p key={id}><em>From {comment.user_name}</em> <i className="fa-solid fa-pen-to-square"
-                                                                             onClick={(e) => this.updateEntity(comment.id)}/>
+                                                                             onClick={(e) => this.handleUpdateCommentButton(comment.id)}/>
                                 <i className="fa fa-trash"/>
-                                <br/>{comment.message}</p>
+                                <br/>
+                                <span >
+                                    {comment.message}
+                                </span>
+                                <span id={comment.id} style={{display: "none"}}>
+                                        <input id={comment.id + plantId} type="text" placeholder={comment.message}/>
+                                        <button className="btn" onClick={(e) => this.updateComment(comment.id, plantId, comment.user_name)}>Update comment</button>
+                                </span>
+                            </p>
                             <span className="timeStamp">At: {comment.time_stamp}</span>
                         </div>
                     ))}
