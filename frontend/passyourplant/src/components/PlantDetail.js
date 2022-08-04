@@ -58,13 +58,14 @@ class PlantDetail extends React.Component {
         document.getElementById("myForm").style.display = "block";
     }
 
-    handleUpdateCommentButton(commentId) {
+    handleUpdateCommentButton(commentId, userName) {
         let updateElement = document.getElementById(commentId);
         updateElement.style.display = 'block';
+        let originalComment = document.getElementById(commentId + userName);
+        originalComment.style.display = 'none';
     }
 
     updateComment(commentId, plantId, userName) {
-        this.handleUpdateCommentButton(commentId);
         const message = document.getElementById(commentId + plantId).value;
         const data = {id: commentId, message: message, user_name: userName};
 
@@ -78,16 +79,17 @@ class PlantDetail extends React.Component {
 
                 if (response.status === 200) {
                     console.log("successfully changed comment");
-
                 }
 
-            }).then(()=> this.getCommentsAndCloseMessageInput(plantId, commentId));
+            }).then(()=> this.getCommentsAndCloseMessageInput(plantId, commentId, userName));
 
     }
 
-    getCommentsAndCloseMessageInput(plantId, commentId){
+    getCommentsAndCloseMessageInput(plantId, commentId, userName){
         let updateElement = document.getElementById(commentId);
         updateElement.style.display = 'none';
+        let originalComment = document.getElementById(commentId + userName);
+        originalComment.style.display = 'block';
         this.getComments(plantId);
     }
 
@@ -156,10 +158,10 @@ class PlantDetail extends React.Component {
                     {comments.map((comment, id) => (
                         <div className="detailsCard comments">
                             <p key={id}><em>From {comment.user_name}</em> <i className="fa-solid fa-pen-to-square"
-                                                                             onClick={(e) => this.handleUpdateCommentButton(comment.id)}/>
+                                                                             onClick={(e) => this.handleUpdateCommentButton(comment.id, comment.user_name)}/>
                                 <i className="fa fa-trash"/>
                                 <br/>
-                                <span >
+                                <span id={comment.id + comment.user_name}>
                                     {comment.message}
                                 </span>
                                 <span id={comment.id} style={{display: "none"}}>
