@@ -39,6 +39,11 @@ public class CommentController {
         commentService.addOrUpdateComment(comment, plantId);
     }
 
+    @DeleteMapping("api/comments/delete-all")
+    private void deleteAllComments(){
+        commentService.deleteAll();
+    }
+
     @DeleteMapping("/api/plants/{plant-id}/comments")
     private void deleteComment(@RequestBody Comment comment, @PathVariable("plant-id") Long plantId) {
         commentService.deleteComment(comment, plantId);
