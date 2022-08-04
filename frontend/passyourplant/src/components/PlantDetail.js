@@ -53,6 +53,26 @@ class PlantDetail extends React.Component {
             })
     }
 
+    updateEntity(commentId) {
+        const message = "Hacked your message"
+        const userName = "Evil hacker"
+        const data = {id: commentId, message: message, user_name: userName}
+        fetch(`/api/plants/${this.state.plant.id}/comments`,
+            {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            })
+            .then(function (response) {
+
+                if (response.status === 200) {
+
+                    console.log("successfully changed comment");
+                }
+
+            }).then(()=> this.getComments(this.state.plant.id));
+    }
+
     handleAddCommentButton() {
         document.getElementById("myForm").style.display = "block";
     }
@@ -121,7 +141,9 @@ class PlantDetail extends React.Component {
                     </div>
                     {comments.map((comment, id) => (
                         <div className="detailsCard comments">
-                            <p key={id} ><em>From {comment.user_name}</em> <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" />
+                            <p key={id}><em>From {comment.user_name}</em> <i className="fa-solid fa-pen-to-square"
+                                                                             onClick={(e) => this.updateEntity(comment.id)}/>
+                                <i className="fa fa-trash"/>
                                 <br/>{comment.message}</p>
                             <span className="timeStamp">At: {comment.time_stamp}</span>
                         </div>
