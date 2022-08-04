@@ -43,4 +43,10 @@ public class CommentController {
     private void deleteComment(@PathVariable("id") Long commentId) {
         commentService.deleteComment(commentId);
     }
+
+    @DeleteMapping("api/comments/delete-all")
+    private void deleteAllComments(){
+        commentService.deleteAll();
+    }
+
 }

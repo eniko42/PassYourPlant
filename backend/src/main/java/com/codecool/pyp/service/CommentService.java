@@ -49,4 +49,8 @@ public class CommentService {
     public List<Comment> getAllComments() {
         return commentRepository.findAll();
     }
+
+    public void deleteAll() {
+        commentRepository.deleteAll();
+    }
 }
