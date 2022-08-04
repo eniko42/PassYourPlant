@@ -1,14 +1,15 @@
 import {useParams} from "react-router-dom";
 import React from "react";
 import "../style/PlantDetail.css"
-
+import { useNavigate } from "react-router-dom";
 
 function withParams(Component) {
-    return props => <Component {...props} params={useParams()}/>;
+    return props => <Component {...props} params={useParams()} navigation={useNavigate()} />;
 }
 
 
 class PlantDetail extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -20,15 +21,13 @@ class PlantDetail extends React.Component {
     }
 
     componentDidMount() {
-        let {plantId} = this.props.params;
+        let { plantId } = this.props.params;
+        const navigation  = this.props.navigation;
         this.setState({
             plantId: plantId,
         })
-        const json = this.getPlantById(plantId);
-        this.setState({
-            plant: json,
-        })
-        this.getComments(plantId)
+        this.getPlantById(id);
+        this.getComments(id)
     }
 
     getPlantById(plantId) {
@@ -52,7 +51,6 @@ class PlantDetail extends React.Component {
                 })
             })
     }
-
 
     handleAddCommentButton() {
         document.getElementById("myForm").style.display = "block";
@@ -111,14 +109,22 @@ class PlantDetail extends React.Component {
         this.getComments(plantId)
     }
 
+    async deleteEntity(id, url) {
+        await fetch(url,
+            {
+                method: "DELETE"
+            })
+    }
+
     render() {
         const {DataisLoaded, plant, comments, plantId} = this.state;
+        const navigation = this.props.navigation;
         if (DataisLoaded) {
             return (
 
                 <div className="details">
                     <div className="detailsCard">
-                        <h2 className="detailsName">{plant.plant_name}</h2>
+                        <h2 className="detailsName">{plant.plant_name} <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" onClick={() => {this.deleteEntity(id, `/api/plants/${id}`).then(navigation("/")); }}/> </h2>
                         <div className="row">
                             <div className="column">
                                 <img className="detailsPicture" src={require(`/src/images/${plant.photo}`)}
@@ -155,11 +161,10 @@ class PlantDetail extends React.Component {
                             </form>
                         </div>
                     </div>
-                    {comments.map((comment, id) => (
+                    {comments.map((comment, commentId) => (
                         <div className="detailsCard comments">
-                            <p key={id}><em>From {comment.user_name}</em> <i className="fa-solid fa-pen-to-square"
-                                                                             onClick={(e) => this.handleUpdateCommentButton(comment.id, comment.user_name)}/>
-                                <i className="fa fa-trash"/>
+                            <p key={commentId} ><em>From {comment.user_name}</em> <i onClick={(e) => this.handleUpdateCommentButton(comment.id, comment.user_name)} className="fa-solid fa-pen-to-square"/>
+                                <i className="fa fa-trash" onClick={()=> {this.deleteEntity(id, `/api/plants/comments/${comment.id}`);this.getComments(id)}}/>
                                 <br/>
                                 <span id={comment.id + comment.user_name}>
                                     {comment.message}

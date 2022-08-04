@@ -24,12 +24,12 @@ public class CommentService {
         this.plantRepository = plantRepository;
     }
 
-    public Set<Comment> getComments(Long plantId) {
+    public Set<Comment> getCommentsByPlantId(Long plantId) {
         Plant plant = getPlantById(plantId);
         return plant.getComments();
     }
 
-    private Plant getPlantById(Long plantId) {
+    public Plant getPlantById(Long plantId) {
         return plantRepository.findById(plantId).orElseThrow(()-> new NoSuchElementException("Not find plant with given id: " + plantId));
     }
 
@@ -41,8 +41,8 @@ public class CommentService {
     }
 
 
-    public void deleteComment(Comment comment, Long plantId) {
-        comment.setPlant(getPlantById(plantId));
+    public void deleteComment(Long commentId) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()-> new NoSuchElementException("There is no comment with given id: " + commentId));
         commentRepository.delete(comment);
     }
 

@@ -26,7 +26,7 @@ public class CommentController {
 
     @GetMapping("/api/plants/{plant-id}/comments")
     private Set<Comment> getComments(@PathVariable("plant-id") Long plantId) {
-        return commentService.getComments(plantId);
+        return commentService.getCommentsByPlantId(plantId);
     }
 
     @PostMapping("/api/plants/{plant-id}/comments")
@@ -39,13 +39,14 @@ public class CommentController {
         commentService.addOrUpdateComment(comment, plantId);
     }
 
+    @DeleteMapping("/api/plants/comments/{id}")
+    private void deleteComment(@PathVariable("id") Long commentId) {
+        commentService.deleteComment(commentId);
+    }
+
     @DeleteMapping("api/comments/delete-all")
     private void deleteAllComments(){
         commentService.deleteAll();
     }
 
-    @DeleteMapping("/api/plants/{plant-id}/comments")
-    private void deleteComment(@RequestBody Comment comment, @PathVariable("plant-id") Long plantId) {
-        commentService.deleteComment(comment, plantId);
-    }
 }

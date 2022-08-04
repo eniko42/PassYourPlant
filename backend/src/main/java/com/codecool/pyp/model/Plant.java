@@ -46,7 +46,10 @@ public class Plant {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Plant plant = (Plant) o;
-        return available == plant.available && Objects.equals(id, plant.id) && Objects.equals(userName, plant.userName) && Objects.equals(plantName, plant.plantName) && Objects.equals(description, plant.description) && Objects.equals(photo, plant.photo) && Objects.equals(location, plant.location) && Objects.equals(contact, plant.contact);
+        return available == plant.available && Objects.equals(id, plant.id) && Objects.equals(userName, plant.userName)
+                && Objects.equals(plantName, plant.plantName) && Objects.equals(description, plant.description)
+                && Objects.equals(photo, plant.photo) && Objects.equals(location, plant.location)
+                && Objects.equals(contact, plant.contact) && comments.equals(plant.comments);
     }
 
     @Override
