@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import React from "react";
 import "../style/PlantDetail.css"
 
 
 function withParams(Component) {
-    return props => <Component {...props} params={useParams()} />;
+    return props => <Component {...props} params={useParams()}/>;
 }
 
 
@@ -15,24 +15,24 @@ class PlantDetail extends React.Component {
             plant: {},
             comments: [],
             DataisLoaded: false,
-            id: 0,
+            plantId: 0,
         }
     }
 
     componentDidMount() {
-        let { id } = this.props.params;
+        let {plantId} = this.props.params;
         this.setState({
-            id: id,
+            plantId: plantId,
         })
-        const json = this.getPlantById(id);
+        const json = this.getPlantById(plantId);
         this.setState({
             plant: json,
         })
-        this.getComments(id)
+        this.getComments(plantId)
     }
 
-    getPlantById(id) {
-        fetch(`/api/plants/${id}`)
+    getPlantById(plantId) {
+        fetch(`/api/plants/${plantId}`)
             .then((res) => res.json())
             .then((json) => {
                 this.setState({
@@ -41,10 +41,9 @@ class PlantDetail extends React.Component {
             })
     }
 
- 
 
-    getComments(id) {
-        fetch(`/api/plants/${id}/comments`)
+    getComments(plantId) {
+        fetch(`/api/plants/${plantId}/comments`)
             .then((res) => res.json())
             .then((json) => {
                 this.setState({
@@ -62,22 +61,22 @@ class PlantDetail extends React.Component {
         document.getElementById("myForm").style.display = "none";
     }
 
-    async submit(id) {
+    async submit(plantId) {
         this.handleClose()
         const message = document.getElementsByName('message')[0].value
         const userName = document.getElementsByName('user_name')[0].value
         const data = {message: message, user_name: userName}
-        await fetch(`/api/plants/${id}/comments`,
+        await fetch(`/api/plants/${plantId}/comments`,
             {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data)
             })
-        this.getComments(id)
+        this.getComments(plantId)
     }
 
     render() {
-        const { DataisLoaded, plant, comments, id} = this.state;
+        const {DataisLoaded, plant, comments, plantId} = this.state;
         if (DataisLoaded) {
             return (
 
@@ -86,7 +85,8 @@ class PlantDetail extends React.Component {
                         <h2 className="detailsName">{plant.plant_name}</h2>
                         <div className="row">
                             <div className="column">
-                                <img className="detailsPicture" src={require(`/src/images/${plant.photo}`)}  alt="nice plant"/>
+                                <img className="detailsPicture" src={require(`/src/images/${plant.photo}`)}
+                                     alt="nice plant"/>
                             </div>
                             <div className="column">
                                 <div className="texts">
@@ -101,16 +101,20 @@ class PlantDetail extends React.Component {
                     </div>
                     <div className="detailsCard">
                         <div className="comments">
-                            <h4>Comments <button className="btn" onClick={this.handleAddCommentButton}>Add new Comment</button></h4>
+                            <h4>Comments <button className="btn" onClick={this.handleAddCommentButton}>Add new
+                                Comment</button></h4>
                         </div>
                     </div>
                     <div className="detailsCard">
                         <div className="chat-popup" id="myForm">
-                            <form className="form-container" onSubmit={(e)=> {e.preventDefault();this.submit(id)}}>
-                                <h4 >New Comment</h4>
+                            <form className="form-container" onSubmit={(e) => {
+                                e.preventDefault();
+                                this.submit(plantId)
+                            }}>
+                                <h4>New Comment</h4>
                                 <input placeholder="Type your name" name="user_name" required/>
                                 <textarea placeholder="Type comment.." name="message" required/>
-                                <button type="submit" className="send" >Send</button>
+                                <button type="submit" className="send">Send</button>
                                 <button type="button" className="cancel" onClick={this.handleClose}>Close</button>
                             </form>
                         </div>
@@ -129,4 +133,5 @@ class PlantDetail extends React.Component {
     }
 
 }
+
 export default withParams(PlantDetail)
