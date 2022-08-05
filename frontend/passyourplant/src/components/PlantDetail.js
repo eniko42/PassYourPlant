@@ -124,7 +124,7 @@ class PlantDetail extends React.Component {
 
                 <div className="details">
                     <div className="detailsCard">
-                        <h2 className="detailsName">{plant.plant_name} <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" onClick={() => {this.deleteEntity(plantId, `/api/plants/${plantId}`).then(navigation("/")); }}/> </h2>
+                        <h2 className="detailsName">{plant.plant_name} <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" onClick={() => {this.deleteEntity(plantId, `/api/plants/${plantId}`).then(()=> {navigation("/")}) }}/> </h2>
                         <div className="row">
                             <div className="column">
                                 <img className="detailsPicture" src={require(`/src/images/${plant.photo}`)}
@@ -164,7 +164,7 @@ class PlantDetail extends React.Component {
                     {comments.map((comment, commentId) => (
                         <div className="detailsCard comments">
                             <p key={commentId} ><em>From {comment.user_name}</em> <i onClick={(e) => this.handleUpdateCommentButton(comment.id, comment.user_name)} className="fa-solid fa-pen-to-square"/>
-                                <i className="fa fa-trash" onClick={()=> {this.deleteEntity(commentId, `/api/plants/comments/${comment.id}`);this.getComments(commentId)}}/>
+                                <i className="fa fa-trash" onClick={()=> {this.deleteEntity(commentId, `/api/plants/comments/${comment.id}`);this.getComments(plantId)}}/>
                                 <br/>
                                 <span id={comment.id + comment.user_name}>
                                     {comment.message}
