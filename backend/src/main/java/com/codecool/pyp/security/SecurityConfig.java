@@ -40,8 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
         http = http.cors().and().csrf().disable();
 
         // Set session management to stateless
@@ -73,16 +73,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 jwtTokenFilter,
                 UsernamePasswordAuthenticationFilter.class
         );
-        return http.build();
     }
 
-    @Override @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
 
-    @Bean
-    AuthenticationManagerBuilder configureAuthManagerBuild(AuthenticationManagerBuilder auth) throws Exception {
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(username -> userRepository
                 .findByName(username)
                         .orElseThrow(
@@ -91,7 +86,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 )
                         )
                 );
-        return auth;
     }
 
     @Bean
