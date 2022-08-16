@@ -4,10 +4,16 @@ import com.codecool.pyp.storage.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +29,7 @@ import static java.lang.String.format;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserRepository userRepository;
     private final JwtTokenFilter jwtTokenFilter;
@@ -73,12 +79,16 @@ public class SecurityConfig{
                 jwtTokenFilter,
                 UsernamePasswordAuthenticationFilter.class
         );
-
         return http.build();
     }
 
+    @Override @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
     @Bean
-    AuthenticationManagerBuilder configure(AuthenticationManagerBuilder auth) throws Exception {
+    AuthenticationManagerBuilder configureAuthManagerBuild(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(username -> userRepository
                 .findByName(username)
                         .orElseThrow(
@@ -107,4 +117,5 @@ public class SecurityConfig{
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
+
 }
