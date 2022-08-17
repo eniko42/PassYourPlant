@@ -2,6 +2,7 @@ package com.codecool.pyp.security;
 
 import com.codecool.pyp.model.User;
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,7 @@ public class JwtTokenUtil {
                 .setIssuer(jwtIssuer)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000)) // 1 week
-                .signWith(new SecretKeySpec(jwtSecret.getBytes(), SignatureAlgorithm.HS512.toString()))
+                .signWith(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                 .compact();
     }
 
