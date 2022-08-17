@@ -30,20 +30,19 @@ public class User implements UserDetails{
 
     private String introduction;
 
+    private Role role;
+
     @OneToMany
     private Set<Plant> plants;
 
     @OneToMany
     private Set<Comment> comments;
 
-    @ElementCollection
-    private Set<Role> authorities;
-
     private boolean enabled = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return role.getGrantedAuthorities();
     }
 
     @Override
