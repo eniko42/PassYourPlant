@@ -3,6 +3,7 @@ package com.codecool.pyp.security;
 import com.codecool.pyp.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,6 +21,7 @@ import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import static com.codecool.pyp.security.Role.USER;
 import static java.lang.String.format;
 
 @Configuration
@@ -60,7 +62,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Set permissions on endpoints
         http.authorizeRequests()
-                // Our private endpoints
+                .antMatchers("/", "index", "/css/*", "/js/*", "/webjars/**/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/api/plants/*", "api/plants/*/comments").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/plants", "api/plants/*/comments").hasRole(USER.name())
+                .antMatchers(HttpMethod.PUT, "/api/plants", "api/plants/*/comments").hasRole(USER.name())
+                .antMatchers(HttpMethod.DELETE, "/api/plants/*", "/api/plants/comments/*").hasRole(USER.name())
                 .anyRequest().authenticated();
 
         // Add JWT token filter
