@@ -2,8 +2,8 @@ package com.codecool.pyp.service;
 
 import com.codecool.pyp.model.Comment;
 import com.codecool.pyp.model.Plant;
-import com.codecool.pyp.storage.CommentRepository;
-import com.codecool.pyp.storage.PlantRepository;
+import com.codecool.pyp.repository.CommentRepository;
+import com.codecool.pyp.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

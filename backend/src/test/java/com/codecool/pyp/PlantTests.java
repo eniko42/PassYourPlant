@@ -2,7 +2,7 @@ package com.codecool.pyp;
 
 import com.codecool.pyp.model.Plant;
 import com.codecool.pyp.service.PlantService;
-import com.codecool.pyp.storage.PlantRepository;
+import com.codecool.pyp.repository.PlantRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
