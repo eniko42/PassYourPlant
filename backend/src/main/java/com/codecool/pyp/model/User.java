@@ -30,6 +30,7 @@ public class User implements UserDetails{
 
     private String introduction;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany
