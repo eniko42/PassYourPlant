@@ -3,8 +3,8 @@ package com.codecool.pyp;
 import com.codecool.pyp.model.Comment;
 import com.codecool.pyp.model.Plant;
 import com.codecool.pyp.service.CommentService;
-import com.codecool.pyp.storage.CommentRepository;
-import com.codecool.pyp.storage.PlantRepository;
+import com.codecool.pyp.repository.CommentRepository;
+import com.codecool.pyp.repository.PlantRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -93,7 +93,7 @@ public class CommentTests {
 
     @Test
     public void deleteCommentTest(){
-        commentService.deleteComment(comment);
+        commentService.deleteComment(comment.getId());
         Assertions.assertTrue(commentRepository.findById(comment.getId()).isEmpty());
     }
 
