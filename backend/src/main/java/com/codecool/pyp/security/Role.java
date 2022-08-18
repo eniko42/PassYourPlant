@@ -15,7 +15,7 @@ import static com.codecool.pyp.security.Permission.*;
 @AllArgsConstructor
 public enum Role{
     USER(Sets.newHashSet(USER_READ, USER_WRITE)),
-    ADMIN(Sets.newHashSet(ADMIN_READ, ADMIN_WRITE));
+    ADMIN(Sets.newHashSet(USER_READ, USER_WRITE, ADMIN_WRITE, ADMIN_READ));
 
     private final Set<Permission> permissions;
 
