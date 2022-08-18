@@ -2,7 +2,6 @@ import React from "react"
 import "../style/AddPlant.css"
 import {useNavigate} from 'react-router-dom';
 import {AuthContext} from './AuthContext'
-import { useState, useEffect } from 'react';
 import {Forbidden} from './Forbidden'
 
 export function AddPlant() {
@@ -79,9 +78,9 @@ export function AddPlant() {
                         <label htmlFor="contact">Photo: </label>
                         <input type="text" name="photo" id="photo"></input>
                     </div>
-
-                    <button onClick={handleClick} className="submitButton btn" type="submit">Upload</button>
-
+                    <div className="formItem">
+                        <button onClick={handleClick} className="submitButton btn" type="submit">Upload</button>
+                    </div>
                 </form>
 
             </div>)
