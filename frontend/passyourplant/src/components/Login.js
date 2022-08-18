@@ -30,18 +30,20 @@ class Login extends Component {
 
         DataHandler.login(username, password)
             .then(response => {
-                const accessToken = response.headers.get("Authorization")
-                const data = parseJwt(accessToken)
-                const user = {data, accessToken}
+                if (response.status === 200) {
+                    const accessToken = response.headers.get("Authorization")
+                    const data = parseJwt(accessToken)
+                    const user = {data, accessToken}
 
-                AuthContext.userLogin(user)
+                    AuthContext.userLogin(user)
 
-                this.setState({
-                    username: '',
-                    password: '',
-                    isLoggedIn: true,
-                    isError: false
-                })
+                    this.setState({
+                        username: '',
+                        password: '',
+                        isLoggedIn: true,
+                        isError: false
+                    })
+                }
             })
             .catch(error => {
                 handleLogError(error)
@@ -65,7 +67,7 @@ class Login extends Component {
                         </div>
                         <div className="formItem">
                             <label htmlFor="password">Your password: </label>
-                            <input type="text" name="password" id="password" required></input>
+                            <input type="password" name="password" id="password" required></input>
                         </div>
                         <button onClick={this.handleSubmit} className="submitButton btn" type="submit">Login</button>
 
