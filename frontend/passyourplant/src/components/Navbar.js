@@ -11,6 +11,7 @@ function Navbar() {
   <div className="collapse navbar-collapse" id="navbarSupportedContent">
     <ul className="navbar-nav mr-auto">
       <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+      <Link className="nav-link" to="/registration">Register</Link>
       <Link className="nav-link" to="/add-plant">Add plant</Link>
       <Link className="nav-link" to="/about">About us</Link>
     </ul>

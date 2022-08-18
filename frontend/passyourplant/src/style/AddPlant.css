@@ -1,6 +1,7 @@
 .addPlantCard {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 80%;
+    max-width: 50%;
+    flex-basis: content;
     margin: auto;
     display:flex;
     flex-wrap: wrap;
@@ -10,19 +11,20 @@
     border-radius: 15px 40px;
     margin-top: 20px;
     margin-bottom: 20px;
+    justify-content: center;
 }
 
 label{
     padding-right: 10px;
+    width: 100%;
 }
 
 
 .formItem {
     float: left;
-    margin: auto;
     margin-bottom: 16px;
     padding: 0 8px;
-    flex-basis: 100%;
+    flex: 0 0 100%;
 }
 
 .submitButton {
