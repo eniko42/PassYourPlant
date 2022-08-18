@@ -11,6 +11,7 @@ import {
 import About from './components/About';
 import PlantDetail from './components/PlantDetail';
 import {AddPlant} from './components/AddPlant';
+import {Register} from './components/Register';
 import Layout from './components/Layout';
 import Login from './components/Login'
 
@@ -23,6 +24,7 @@ root.render(
             <Route path='plant-detail/:plantId' element={<Layout><PlantDetail/></Layout>}/>
             <Route path="add-plant" element={<Layout><AddPlant/></Layout>}/>
             <Route path='/login' element={<Layout><Login /></Layout>}/>
+            <Route path="registration" element={<Layout><Register/></Layout>}/>
         </Routes>
     </BrowserRouter>
 );
