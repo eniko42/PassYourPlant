@@ -24,10 +24,10 @@ export function Register(){
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                "user_name": userName,
+                "name": userName,
                 "password": password,
                 "email": email,
-                "intro": intro,
+                "introduction": intro,
                 "role": "USER",
 
             })
