@@ -53,7 +53,7 @@ export function Register(){
                 </div>
                 <div className="formItem">
                     <label htmlFor="intro">Introduce yourself! </label>
-                    <input type="textarea" name="intro" id="intro" maxLength={1000}></input>
+                    <textarea name="intro" id="intro" maxLength={1000}></textarea>
                 </div>
 
                 <button onClick={handleClick} className="submitButton btn" type="submit">Register</button>
