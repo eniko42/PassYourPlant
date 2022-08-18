@@ -5,6 +5,7 @@ export function Forbidden() {
         <h1>
             If you want to use this function please log in
         </h1>
-        <Link to={"/login"}>Login</Link>
+        <h3><Link to={"/login"}>Login</Link></h3>
+
     </div>);
 }
