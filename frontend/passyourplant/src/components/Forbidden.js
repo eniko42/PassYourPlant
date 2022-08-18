@@ -1,7 +1,10 @@
+import {Link} from 'react-router-dom'
+
 export function Forbidden() {
     return (<div className="addPlantCard">
         <h1>
-            You have no permission for this page
+            If you want to use this function please log in
         </h1>
+        <Link to={"/login"}>Login</Link>
     </div>);
 }
