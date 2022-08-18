@@ -2,18 +2,16 @@ package com.codecool.pyp.security;
 
 
 import com.codecool.pyp.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -22,17 +20,19 @@ import org.springframework.web.filter.CorsFilter;
 import javax.servlet.http.HttpServletResponse;
 
 import static com.codecool.pyp.security.Role.USER;
-import static java.lang.String.format;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
 
-    public SecurityConfig(UserService userService) {
+    @Autowired
+    public SecurityConfig(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Set permissions on endpoints
         http.authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*", "/webjars/**/*").permitAll()
+                .antMatchers("/", "index", "/css/*", "/js/*", "/webjars/**/*", "/registration").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/plants/*", "api/plants/*/comments").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/plants", "api/plants/*/comments").hasRole(USER.name())
                 .antMatchers(HttpMethod.PUT, "/api/plants", "api/plants/*/comments").hasRole(USER.name())
@@ -83,20 +83,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder());
+        provider.setPasswordEncoder(passwordEncoder);
         provider.setUserDetailsService(userService);
         return provider;
     }
 
-    /*@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
-    }*/
 
-    @Bean
+    /*@Bean
     public PasswordEncoder passwordEncoder(){
         return NoOpPasswordEncoder.getInstance();
-    }
+    }*/
 
     @Bean
     public CorsFilter corsFilter() {
