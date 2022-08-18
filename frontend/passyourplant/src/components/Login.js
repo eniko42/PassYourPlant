@@ -58,6 +58,7 @@ class Login extends Component {
             return (
                 <div>
                     <form className="addPlantCard">
+                        <h1>Log in</h1>
                         <div className="formItem">
                             <label htmlFor="user_name">Your name: </label>
                             <input type="text" name="user_name" id="user_name" required></input>
