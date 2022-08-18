@@ -1,13 +1,13 @@
 import {useParams} from "react-router-dom";
 import React from "react";
 import "../style/PlantDetail.css"
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {AuthContext} from './AuthContext'
 import {Forbidden} from './Forbidden'
 import {Navigate} from 'react-router-dom'
 
 function withParams(Component) {
-    return props => <Component {...props} params={useParams()} navigation={useNavigate()} />;
+    return props => <Component {...props} params={useParams()} navigation={useNavigate()}/>;
 }
 
 
@@ -21,16 +21,23 @@ class PlantDetail extends React.Component {
             DataisLoaded: false,
             isLoggedIn: false,
             plantId: 0,
+            user: null,
         }
     }
 
     componentDidMount() {
-        let { plantId } = this.props.params;
+        let {plantId} = this.props.params;
         let isLoggedIn = AuthContext.userIsAuthenticated();
         this.setState({
             plantId: plantId,
             isLoggedIn: isLoggedIn
         })
+        if (isLoggedIn) {
+            let user = AuthContext.getUser()
+            this.setState({
+                user: user
+            })
+        }
         this.getPlantById(plantId);
         this.getComments(plantId)
     }
@@ -65,10 +72,10 @@ class PlantDetail extends React.Component {
         }
     }
 
-    handleUpdateCommentButton(commentId, userName) {
+    handleUpdateCommentButton(commentId, user) {
         let updateElement = document.getElementById(commentId);
         updateElement.style.display = 'block';
-        let originalComment = document.getElementById(commentId + userName);
+        let originalComment = document.getElementById(commentId + user.data.sub);
         originalComment.style.display = 'none';
     }
 
@@ -79,7 +86,9 @@ class PlantDetail extends React.Component {
         fetch(`/api/plants/${plantId}/comments`,
             {
                 method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(data)
             })
             .then(function (response) {
@@ -104,15 +113,18 @@ class PlantDetail extends React.Component {
         document.getElementById("myForm").style.display = "none";
     }
 
-    async submit(plantId) {
+    async submit(plantId, user) {
         this.handleClose()
         const message = document.getElementsByName('message')[0].value
-        const userName = document.getElementsByName('user_name')[0].value
-        const data = {message: message, user_name: userName}
+        const userName = user.data.sub
+        const data = {message: message, user_name: user.data.sub}
         await fetch(`/api/plants/${plantId}/comments`,
             {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': user.accessToken
+                },
                 body: JSON.stringify(data)
             })
         this.getComments(plantId)
@@ -126,14 +138,19 @@ class PlantDetail extends React.Component {
     }
 
     render() {
-        const {DataisLoaded, plant, comments, plantId, isLoggedIn} = this.state;
+        const {DataisLoaded, plant, comments, plantId, isLoggedIn, user} = this.state;
         const navigation = this.props.navigation;
         if (DataisLoaded) {
             return (
 
                 <div className="details">
                     <div className="detailsCard">
-                        <h2 className="detailsName">{plant.plant_name} <i className="fa-solid fa-pen-to-square"/> <i className="fa fa-trash" onClick={() => {this.deleteEntity(plantId, `/api/plants/${plantId}`).then(()=> {navigation("/")}) }}/> </h2>
+                        <h2 className="detailsName">{plant.plant_name} <i className="fa-solid fa-pen-to-square"/> <i
+                            className="fa fa-trash" onClick={() => {
+                            this.deleteEntity(plantId, `/api/plants/${plantId}`).then(() => {
+                                navigation("/")
+                            })
+                        }}/></h2>
                         <div className="row">
                             <div className="column">
                                 <img className="detailsPicture" src={require(`/src/images/${plant.photo}`)}
@@ -145,14 +162,15 @@ class PlantDetail extends React.Component {
                                     <p>Description: {plant.description}</p>
                                     <p>Location: {plant.location}</p>
                                     <p>Contact info: {plant.contact}</p>
-                                    <p>Photo: {plant.photo}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="detailsCard">
                         <div className="comments">
-                            <h4>Comments <button className="btn" onClick={()=>{this.handleAddCommentButton(isLoggedIn, navigation)}}>Add new
+                            <h4>Comments <button className="btn" onClick={() => {
+                                this.handleAddCommentButton(isLoggedIn, navigation)
+                            }}>Add new
                                 Comment</button></h4>
                         </div>
                     </div>
@@ -160,10 +178,9 @@ class PlantDetail extends React.Component {
                         <div className="chat-popup" id="myForm">
                             <form className="form-container" onSubmit={(e) => {
                                 e.preventDefault();
-                                this.submit(plantId)
+                                this.submit(plantId, user)
                             }}>
                                 <h4>New Comment</h4>
-                                <input placeholder="Type your name" name="user_name" required/>
                                 <textarea placeholder="Type comment.." name="message" required/>
                                 <button type="submit" className="send">Send</button>
                                 <button type="button" className="cancel" onClick={this.handleClose}>Close</button>
@@ -172,15 +189,21 @@ class PlantDetail extends React.Component {
                     </div>
                     {comments.map((comment, commentId) => (
                         <div className="detailsCard comments">
-                            <p key={commentId} ><em>From {comment.user_name}</em> <i onClick={(e) => this.handleUpdateCommentButton(comment.id, comment.user_name)} className="fa-solid fa-pen-to-square"/>
-                                <i className="fa fa-trash" onClick={()=> {this.deleteEntity(commentId, `/api/plants/comments/${comment.id}`);this.getComments(plantId)}}/>
+                            <p key={commentId}><em>From {comment.user_name}</em> <i
+                                onClick={(e) => this.handleUpdateCommentButton(comment.id, comment.user_name)}
+                                className="fa-solid fa-pen-to-square"/>
+                                <i className="fa fa-trash" onClick={() => {
+                                    this.deleteEntity(commentId, `/api/plants/comments/${comment.id}`);
+                                    this.getComments(plantId)
+                                }}/>
                                 <br/>
                                 <span id={comment.id + comment.user_name}>
                                     {comment.message}
                                 </span>
                                 <span id={comment.id} style={{display: "none"}}>
                                         <input id={comment.id + plantId} type="text" placeholder={comment.message}/>
-                                        <button className="btn" onClick={(e) => this.updateComment(comment.id, plantId, comment.user_name)}>Update comment</button>
+                                        <button className="btn"
+                                                onClick={(e) => this.updateComment(comment.id, plantId, comment.user_name)}>Update comment</button>
                                 </span>
                             </p>
                             <span className="timeStamp">At: {comment.time_stamp}</span>
