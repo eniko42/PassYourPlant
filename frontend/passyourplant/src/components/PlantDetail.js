@@ -2,6 +2,9 @@ import {useParams} from "react-router-dom";
 import React from "react";
 import "../style/PlantDetail.css"
 import { useNavigate } from "react-router-dom";
+import {AuthContext} from './AuthContext'
+import {Forbidden} from './Forbidden'
+import {Navigate} from 'react-router-dom'
 
 function withParams(Component) {
     return props => <Component {...props} params={useParams()} navigation={useNavigate()} />;
@@ -16,15 +19,17 @@ class PlantDetail extends React.Component {
             plant: {},
             comments: [],
             DataisLoaded: false,
+            isLoggedIn: false,
             plantId: 0,
         }
     }
 
     componentDidMount() {
         let { plantId } = this.props.params;
-        const navigation  = this.props.navigation;
+        let isLoggedIn = AuthContext.userIsAuthenticated();
         this.setState({
             plantId: plantId,
+            isLoggedIn: isLoggedIn
         })
         this.getPlantById(plantId);
         this.getComments(plantId)
@@ -52,8 +57,12 @@ class PlantDetail extends React.Component {
             })
     }
 
-    handleAddCommentButton() {
-        document.getElementById("myForm").style.display = "block";
+    handleAddCommentButton(isLoggedIn, navigation) {
+        if (isLoggedIn) {
+            document.getElementById("myForm").style.display = "block";
+        } else {
+            navigation("/forbidden")
+        }
     }
 
     handleUpdateCommentButton(commentId, userName) {
@@ -117,7 +126,7 @@ class PlantDetail extends React.Component {
     }
 
     render() {
-        const {DataisLoaded, plant, comments, plantId} = this.state;
+        const {DataisLoaded, plant, comments, plantId, isLoggedIn} = this.state;
         const navigation = this.props.navigation;
         if (DataisLoaded) {
             return (
@@ -143,7 +152,7 @@ class PlantDetail extends React.Component {
                     </div>
                     <div className="detailsCard">
                         <div className="comments">
-                            <h4>Comments <button className="btn" onClick={this.handleAddCommentButton}>Add new
+                            <h4>Comments <button className="btn" onClick={()=>{this.handleAddCommentButton(isLoggedIn, navigation)}}>Add new
                                 Comment</button></h4>
                         </div>
                     </div>
