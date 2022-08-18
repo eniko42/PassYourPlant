@@ -11,7 +11,7 @@ function Navbar() {
     if(AuthContext.userIsAuthenticated()){
       return(
           <>
-            <p className="nav-brand">Logged in as {username}</p>
+            <p className="nav-item">Logged in as {username}</p>
             <Link className="nav-link" to="/logout">Logout</Link>
           </>
 
