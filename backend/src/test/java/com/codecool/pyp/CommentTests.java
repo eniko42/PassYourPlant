@@ -93,7 +93,7 @@ public class CommentTests {
 
     @Test
     public void deleteCommentTest(){
-        commentService.deleteComment(comment);
+        commentService.deleteComment(comment.getId());
         Assertions.assertTrue(commentRepository.findById(comment.getId()).isEmpty());
     }
 
