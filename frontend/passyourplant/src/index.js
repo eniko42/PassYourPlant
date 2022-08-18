@@ -13,8 +13,9 @@ import PlantDetail from './components/PlantDetail';
 import {AddPlant} from './components/AddPlant';
 import {Register} from './components/Register';
 import Layout from './components/Layout';
-import Login from './components/Login'
 import {Forbidden} from './components/Forbidden'
+import Login from './components/Login';
+import {Logout} from './components/Logout';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,6 +26,7 @@ root.render(
             <Route path='plant-detail/:plantId' element={<Layout><PlantDetail/></Layout>}/>
             <Route path="add-plant" element={<Layout><AddPlant/></Layout>}/>
             <Route path='/login' element={<Layout><Login /></Layout>}/>
+            <Route path='/logout' element={<Layout><Logout /></Layout>}/>
             <Route path="registration" element={<Layout><Register/></Layout>}/>
             <Route path="forbidden" element={<Layout><Forbidden></Forbidden></Layout>}></Route>
         </Routes>
