@@ -1,10 +1,13 @@
 import React from "react"
 import "../style/AddPlant.css"
 import {useNavigate} from 'react-router-dom';
+import {useState} from 'react'
 
 export function Register(){
 
     const navigate = useNavigate();
+    const [isError, setError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     function handleClick(e) {
         e.preventDefault();
@@ -17,6 +20,10 @@ export function Register(){
         const callback = fetchResult => {
             if (fetchResult.status === 200) {
                 navigate('/');
+            } else if (fetchResult.status === 406) {
+                console.log(fetchResult)
+                setError(true);
+                setErrorMessage("Username already exist")
             }
         }
 
@@ -39,6 +46,7 @@ export function Register(){
         <div>
             <form className="addPlantCard">
                 <h1>Registration</h1>
+                <h3 style={isError ? {display:"block"} : {display: "none"}}>{errorMessage}</h3>
                 <div className="formItem">
                     <label htmlFor="user_name">Your name: </label>
                     <input type="text" name="user_name" id="user_name" required></input>
