@@ -6,7 +6,7 @@
 
 .pageContainer {
   content: "";
-  background-image: url("/src/images/wallpaper.jpg");
+  background-image: url("/img/wallpaper.jpg");
   top: 0;
   left: 0;
   bottom: 0;

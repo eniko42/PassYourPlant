@@ -153,7 +153,7 @@ class PlantDetail extends React.Component {
                         }}/></h2>
                         <div className="row">
                             <div className="column">
-                                <img className="detailsPicture" src={require(`/src/images/${plant.photo}`)}
+                                <img className="detailsPicture" src={`/img/${plant.photo}`}
                                      alt="nice plant"/>
                             </div>
                             <div className="column">

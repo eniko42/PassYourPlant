@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Set permissions on endpoints
         http.authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*", "/webjars/**/*", "/favicon.ico", "/registration").permitAll()
+                .antMatchers("/", "index", "/static/css/*", "/static/js/*", "/login", "/index.html", "/static/media/*","/plant-detail/static/media/*", "/static/*", "/webjars/**/*", "/favicon.ico", "/registration", "/img/*").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/plants/*", "/api/plants", "/api/plants/*/comments").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/plants", "/api/plants/*/comments").hasRole(USER.name())
                 .antMatchers(HttpMethod.PUT, "/api/plants", "/api/plants/*/comments").hasRole(USER.name())
