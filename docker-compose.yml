@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=diana
+      - POSTGRES_PASSWORD=vitaminC
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+  api:
+    container_name: pyp-container
+    build:
+      context: ./
+      #target: production
+    image: pyp
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/diana
+      - SPRING_DATASOURCE_USERNAME=diana
+      - SPRING_DATASOURCE_PASSWORD=vitaminC
+    links:
+      - db
+    volumes:
+      - './:/src'
+volumes:
+  db:
+    driver: local
