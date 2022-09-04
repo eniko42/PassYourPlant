@@ -1,0 +1,40 @@
+.addPlantCard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 50%;
+    flex-basis: content;
+    margin: auto;
+    display:flex;
+    flex-wrap: wrap;
+    height: 100vh;
+    padding: 20px;
+    background-color: beige;
+    border-radius: 15px 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+label{
+    padding-right: 10px;
+    width: 100%;
+}
+
+
+.formItem {
+    margin-bottom: 16px;
+    padding: 0 8px;
+    text-align: center;
+    width: 100%;
+}
+
+.submitButton {
+    justify-content: center;
+    align-self: center;
+    float: none;
+}
+
+.btn {
+    background-color: #31632d;
+    color: white;
+    font-size: 20px;
+}

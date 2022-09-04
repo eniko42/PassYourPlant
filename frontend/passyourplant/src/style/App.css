@@ -1,0 +1,110 @@
+.App {
+  text-align: center;
+  
+
+}
+
+.pageContainer {
+  content: "";
+  background-image: url("/img/wallpaper.jpg");
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+  overflow: auto;
+}
+
+
+
+a:link{
+  color:black;
+}
+
+a:visited{
+  color:black;
+}
+
+.logos{
+  display:flex;
+  flex-wrap: wrap;
+  width: auto;
+}
+
+.App-logo {
+  flex: 1;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-logo-2 {
+  flex: 1;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation-name: App-logo-move;
+    animation-iteration-count: 1;
+    animation-duration: 5s;
+      }
+  .App-logo-2{
+    animation: App-logo-move-2 1 3s linear;
+  }
+}
+
+.App-header {
+  background-color: #31632d;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Card-container{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 3%;
+} 
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-move {
+  from {
+    transform: translateX(-100%);
+  }
+  to{
+    transform: translateX(0%);
+  }
+}
+
+@keyframes App-logo-move-2 {
+  from {
+    transform: translateX(100%);
+  }
+  to{
+    transform: translateX(0%);
+  }
+}
+
+i {
+  float: right;
+  padding: 5px;
+  font-size: 25px;
+}
+
+i:hover {
+  background: #bceabc;
+}
+
+.nav-item {
+  padding: 0.5rem;
+  margin: 0;
+}
